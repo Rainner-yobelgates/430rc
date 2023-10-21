@@ -1,6 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import "hamburger.css";
 
 body{
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
+} 
+.navbar{
+    .nav-link{
+        color: black;
+    }
+    .fa-bag-shopping{
+        font-size: 18px;
+    }
+}
+
+.hero{
+    margin-top: 56px;
+    height: 84vh;
+    .hero-container{
+        height: 100%;
+        background-size: cover;
+    }
+    .text-container {
+        padding-top: 55vh;
+    }
+}
+/* Smartphone */
+@media (max-width: 575.98px) { 
+    
+}
+/* Tablets */
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    
+}
+/* Desktop */
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    
 }
