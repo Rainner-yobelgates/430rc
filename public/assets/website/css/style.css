@@ -16,24 +16,40 @@ body{
 
 .hero{
     margin-top: 56px;
-    height: 84vh;
-    .hero-container{
-        height: 100%;
-        background-size: cover;
-    }
-    .text-container {
-        padding-top: 55vh;
-    }
+}
+.carousel-caption{
+    bottom: 7rem;
+    text-align: left;
 }
 /* Smartphone */
-@media (max-width: 575.98px) { 
-    
+/* @media (max-width: 575.98px)   */
+@media (max-width: 767.98px) { 
+    .carousel-caption{
+        bottom: .15rem;
+        left: 10%;
+        .btn{
+            font-size: 8px;
+        }
+        .text-hero{
+            font-size: 8px !important
+        };
+        .text-title{
+            font-size: 10px !important
+        };
+    }
 }
-/* Tablets */
-@media (min-width: 576px) and (max-width: 767.98px) { 
-    
-}
-/* Desktop */
+/* Desktop and Ipad */
 @media (min-width: 768px) and (max-width: 991.98px) { 
-    
+    .carousel-caption{
+        bottom: 1rem;
+        .btn{
+            font-size: 16px;
+        }
+        .text-hero{
+            font-size: 16px !important
+        };
+        .text-title{
+            font-size: 18px !important
+        };
+    }
 }
