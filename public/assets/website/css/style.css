@@ -17,16 +17,35 @@ body{
 .hero{
     margin-top: 56px;
 }
-.carousel-caption{
+.carousel-text-hero{
+    left: 10%;
     bottom: 7rem;
     text-align: left;
+}
+.carousel-text-motivation{
+    bottom: 8rem;
+}
+.carousel-text-about{
+    bottom: 9rem;
 }
 /* Smartphone */
 /* @media (max-width: 575.98px)   */
 @media (max-width: 767.98px) { 
-    .carousel-caption{
+    .carousel-text-about{
+        bottom: 1rem;
+    }
+    .carousel-text-motivation{
+        bottom: 1.15rem;
+        .text-quote{
+            font-size: 16px;
+            margin-bottom: 18px !important;
+        }
+        .text-quote-by{
+            font-size: 13px; 
+        }
+    }
+    .carousel-text-hero{
         bottom: .15rem;
-        left: 10%;
         .btn{
             font-size: 8px;
         }
@@ -40,7 +59,20 @@ body{
 }
 /* Desktop and Ipad */
 @media (min-width: 768px) and (max-width: 991.98px) { 
-    .carousel-caption{
+    .carousel-text-about{
+        bottom: 5rem;
+    }
+    .carousel-text-motivation{
+        bottom: 4.15rem;
+        .text-quote{
+            font-size: 22px;
+            margin-bottom: 18px !important;
+        }
+        .text-quote-by{
+            font-size: 18px; 
+        }
+    }
+    .carousel-text-hero{
         bottom: 1rem;
         .btn{
             font-size: 16px;
