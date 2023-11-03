@@ -10,7 +10,7 @@
                 <input type="text" class="form-control me-3" placeholder="Search Product Here">
                 <i class="fas fa-search" style="font-size: 30px"></i>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4 col-lg-3">
                 <div class="card shadow-sm mb-3">
                     <a style="text-decoration: none;" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                         <div class="card-header bg-white">
@@ -86,10 +86,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8 col-lg-9">
                 <div class="row">
                 @for ($i = 1; $i <= 7; $i++)
-                    <div class="col-4">
+                    <div class="col-lg-4 col-md-6">
                         <a class="nav-link p-0 mb-4" href="">
                             <div class="item">
                                 <div class="card">

@@ -18,4 +18,7 @@ class HomeController extends Controller
     public function products(){
         return view('website.products');
     }
+    public function detail(){
+        return view('website.detail');
+    }
 }
