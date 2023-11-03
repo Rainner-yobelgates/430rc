@@ -11,16 +11,16 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
           <li class="nav-item">
-            <a class="nav-link active text-center" aria-current="page" href="#">Home</a>
+            <a class="nav-link active text-center" aria-current="page" href="{{route('home')}}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active text-center" aria-current="page" href="#">About</a>
+            <a class="nav-link active text-center" aria-current="page" href="{{route('about')}}">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active text-center" aria-current="page" href="#">Gallery</a>
+            <a class="nav-link active text-center" aria-current="page" href="{{route('gallery')}}">Gallery</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active text-center" aria-current="page" href="#">Product</a>
+            <a class="nav-link active text-center" aria-current="page" href="{{route('products')}}">Product</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active text-center" aria-current="page" href="#"><i class="fa-solid fa-bag-shopping"></i></a>

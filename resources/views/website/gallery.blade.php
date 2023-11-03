@@ -3,9 +3,9 @@
 @section('content')
 
 <section class="gallery mt-5">
-    <h1 class="text-center fw-bold">Our Gallery</h1>
     <div class="container mt-4">
         <div class="row">
+            <h1 class="text-center fw-bold">Our Gallery</h1>
             <div class="col-lg-4 col-sm-6 mb-3">
                 <img src="{{asset('assets/website/image/g1.png')}}" class="img-fluid" alt="image gallery">
             </div>
