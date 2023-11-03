@@ -5,6 +5,7 @@ body{
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
 } 
+/* Home Page */
 .navbar{
     .nav-link{
         color: black;
@@ -25,9 +26,19 @@ body{
 .carousel-text-motivation{
     bottom: 8rem;
 }
+/* Abuot Page */
 .carousel-text-about{
     bottom: 9rem;
 }
+/* gallery page */
+.gallery .img-fluid{
+    border-radius: 5px;
+    object-fit: cover;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
 /* Smartphone */
 /* @media (max-width: 575.98px)   */
 @media (max-width: 767.98px) { 

@@ -16,19 +16,19 @@
                                 <img src="{{asset('assets/website/image/product.png')}}" class="card-img-top" alt="...">
                                 <div class="card-body">
                                   <h6 class="card-title text-dark">Prototype 001 - Men's Tank</h6>
-                                  <div class="row my-3">
-                                    <div class="col-4">
-                                        <div class="btn btn-light">S</div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="btn btn-light">M</div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="btn btn-light">L</div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="btn btn-light">XL</div>
-                                    </div>
+                                  <div class="mb-3">
+                                        <div class="btn btn-light mt-2">
+                                            <p class="mb-0">S</p>
+                                        </div>
+                                        <div class="btn btn-light mt-2">
+                                            <p class="mb-0">M</p>
+                                        </div>
+                                        <div class="btn btn-light mt-2">
+                                            <p class="mb-0">L</p>
+                                        </div>
+                                        <div class="btn btn-light mt-2">
+                                            <p class="mb-0">XL</p>
+                                        </div>
                                   </div>
                                   <p class="card-title text-dark">Rp 300.000 IDR</p>
                                 </div>
@@ -123,12 +123,6 @@
                 800:{
                     items:4,
                 },
-                1000:{
-                    items:5,
-                },
-                1200:{
-                    items:6,
-                }
             }
         })
     });
