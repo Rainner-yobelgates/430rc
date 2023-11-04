@@ -18,3 +18,4 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
 Route::get('/products', [HomeController::class, 'products'])->name('products');
 Route::get('/detail', [HomeController::class, 'detail'])->name('detail');
+Route::get('/cart', [HomeController::class, 'cart'])->name('cart');

@@ -83,6 +83,9 @@
                     </a>
                 </div>
             @endfor
+            <div class="col-12 text-center">
+                <a href="" class="btn btn-dark w-25 mt-3 rounded-pill">View All</a>
+            </div>
         </div>
     </div>
 </section>

@@ -21,4 +21,7 @@ class HomeController extends Controller
     public function detail(){
         return view('website.detail');
     }
+    public function cart(){
+        return view('website.cart');
+    }
 }
