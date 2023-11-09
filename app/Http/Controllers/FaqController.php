@@ -21,59 +21,59 @@ class FaqController extends Controller
         ];
     }
 
-    function index(){
+    public function index(){
         $title = 'Data FAQ';
         $active = 'faq';
         return view('admin.faq.index', compact('title', 'active'));
     }
 
-    function create(){
+    public function create(){
         $title = 'Create FAQ';
         $viewType = 'create';
         $active = 'faq';
         return view('admin.faq.forms', compact('viewType', 'title', 'active'));
     }
 
-    function show(Faq $faq){
+    public function show(Faq $faq){
         $title = 'Show FAQ';
         $viewType = 'show';
         $active = 'faq';
         return view('admin.faq.forms', compact('faq', 'viewType', 'title', 'active'));
     }
 
-    function store(Request $request){
+    public function store(Request $request){
         $data = $this->validate($request, $this->passingData);
 
         $getFaq = Faq::create($data);
         return redirect(route('panel.faq.show', $getFaq->id))->with('success', 'Faq created successfully');
     }
 
-    function edit(Faq $faq){
+    public function edit(Faq $faq){
         $title = 'Edit FAQ';
         $viewType = 'edit';
         $active = 'faq';
         return view('admin.faq.forms', compact('faq', 'viewType', 'title', 'active'));
     }
 
-    function update(Faq $faq, Request $request){
+    public function update(Faq $faq, Request $request){
         $data = $this->validate($request, $this->passingData);
         
         $faq->update($data);
         return redirect(route('panel.faq.show', $faq->id))->with('success', 'Faq created successfully');
     }
     
-    function delete(Faq $faq){
+    public function delete(Faq $faq){
         $faq->delete();
         return redirect(route('panel.faq.index'))->with('success', 'Faq deleted successfully');
     }
 
-    function data(Request $request)
+    public function data(Request $request)
     {
         if ($request->ajax()) {
             $data = Faq::get();
             return DataTables::of($data)
                 ->addIndexColumn()                
-                ->rawColumns(['title', 'content', 'order', 'status', 'action'])
+                ->rawColumns(['title', 'order', 'status', 'action'])
                 ->editColumn('status', function ($row) {
                     return [
                         get_list_status()[$row->status],

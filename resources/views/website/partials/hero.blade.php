@@ -2,7 +2,7 @@
     <div id="carouselHero" class="carousel carousel-dark slide">
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="10000">
-            <img src="{{asset('assets/website/image/hero.png')}}" class="d-block w-100" alt="...">
+            <img src="{{isset($setting['header']) ? asset('storage/'.$setting['header']) : asset('assets/website/image/hero.png')}}" style="max-height: 890px;object-fit:cover;" class="d-block w-100" alt="...">
             <div class="carousel-caption carousel-text-hero">
                 <h5 class="text-white text-hero mb-1">THE COLLECTON 430</h5>
                 <h4 class="text-white fw-bold text-title">THE NEW BRAND LOCAL WITH GREAT QUALITY FROM INDONESIAN</h4>

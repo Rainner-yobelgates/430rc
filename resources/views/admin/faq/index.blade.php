@@ -16,7 +16,6 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama</th>
-                                <th>Content</th>
                                 <th>Order</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
@@ -39,7 +38,6 @@
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex', class:"align-middle"},
                     {data: 'title', name: 'title', class:"align-middle"},
-                    {data: 'content', name: 'content', class:"align-middle"},
                     {data: 'order', name: 'order', class:"align-middle"},
                     {data: 'status', name: 'status', class:"align-middle"},
                     {data: 'action', name: 'action', class:"align-middle"},

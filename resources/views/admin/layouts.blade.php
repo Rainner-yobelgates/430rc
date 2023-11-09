@@ -10,6 +10,7 @@
 
 	<title>@yield('title')</title>
 
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="{{ asset('admin/static/css/app.css') }}" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	{{-- Fontawesome --}}
@@ -17,7 +18,8 @@
 	{{-- Datatables --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 	<link href="https://cdn.datatables.net/v/bs4/dt-1.13.7/datatables.min.css" rel="stylesheet">
-
+	{{-- summernote --}}
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -41,6 +43,11 @@
 					<li class="sidebar-item {{ $active == "faq" ? "active" : "" }}">
 						<a class="sidebar-link" href="{{route('panel.faq.index')}}">
                             <i class="align-middle" data-feather="help-circle"></i> <span class="align-middle">Faq</span>
+                        </a>
+					</li>
+					<li class="sidebar-item {{ $active == "setting" ? "active" : "" }}">
+						<a class="sidebar-link" href="{{route('panel.setting.index')}}">
+                            <i class="fa-solid fa-gear align-middle" style="font-size: 18px;"></i> <span class="align-middle">Setting</span>
                         </a>
 					</li>
                     {{-- <li class="sidebar-item">
@@ -101,6 +108,20 @@
 	<script type="text/javascript" src="{{ asset('admin/static/js/app.js') }}"></script>
 	<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/v/bs4/dt-1.13.7/datatables.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
+	@if (session()->has('success'))
+		<script>
+			swal({
+			title: "Success",
+			text: '{{session()->get('success')}}',
+			icon: "success",
+			button: "Oke",
+		});
+		</script>
+	@endif
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
@@ -111,9 +132,9 @@
 				nextArrow: "<span title=\"Next month\">&raquo;</span>",
 				defaultDate: defaultDate
 			});
-		});
-		
+		});		
 	</script>
+	
 	@yield('script')
 
 </body>

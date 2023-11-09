@@ -49,7 +49,7 @@
             <div id="carouselMotivation" class="carousel carousel-dark slide">
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-bs-interval="10000">
-                    <img src="{{asset('assets/website/image/motivation.png')}}" style="max-height: 472px;object-fit:cover;" class="d-block w-100" alt="...">
+                    <img src="{{isset($setting['motivation']) ? asset('storage/'.$setting['motivation']) : asset('assets/website/image/motivation.png')}}" style="max-height: 472px;object-fit:cover;" class="d-block w-100" alt="...">
                     <div class="carousel-caption carousel-text-motivation">
                         <h1 class="text-white text-quote mb-5 fw-bold">‘’ PRESTIGE FIRST, PACE FOLLOWS ‘’</h1>
                         <h5 class="text-white text-quote-by mb-1 fw-bold">~ 430 Running Club ~</h5>
@@ -60,24 +60,27 @@
         </div>
     </div>
 </section>
+@if (isset($getFaq))
 <section class="faq mt-4">
     <div class="container">
         <div class="row">
             <h1 class="fw-bold mb-3 text-center">FAQ</h1>
             <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        What types of products are available in this store?
-                    </button>
-                  </h2>
-                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body bg-light">
-                      <p class="mb-0 ms-2">We have several types of products, including sportswear, accessories, and other complements such as water bottles and socks.</p>
+                @foreach ($getFaq as $key => $faq)
+                    <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading{{$key}}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$key}}" aria-expanded="false" aria-controls="collapse{{$key}}">
+                            {{$faq->title}}
+                        </button>
+                    </h2>
+                    <div id="collapse{{$key}}" class="accordion-collapse collapse" aria-labelledby="heading{{$key}}" data-bs-parent="#accordionExample">
+                        <div class="accordion-body bg-light">
+                            {!! $faq->content !!}
+                        </div>
                     </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
+                    </div>
+                @endforeach
+                {{-- <div class="accordion-item">
                   <h2 class="accordion-header" id="headingTwo">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         Is this product specifically intended for runners?"
@@ -100,11 +103,12 @@
                         <p class="mb-0 ms-2">We have several types of products, including sportswear, accessories, and other complements such as water bottles and socks.</p>
                     </div>
                   </div>
-                </div>
+                </div> --}}
               </div>
         </div>
     </div>
 </section>
+@endif
 @stop
 @section('script')
 <script>

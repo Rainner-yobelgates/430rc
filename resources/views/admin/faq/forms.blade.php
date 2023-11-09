@@ -35,8 +35,7 @@
                     <label class="col-sm-2 col-form-label">Content <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
                         <div class="form-floating">
-                            <textarea class="form-control" placeholder="" id="floatingTextarea2" name="content" style="height: 100px" {{$attr}}>{{$faq->content ?? ''}}</textarea>
-                            <label for="floatingTextarea2">Input Content Field</label>
+                            <textarea class="form-control" placeholder="" id="floatingTextarea2" name="content" style="height: 100px">{{$faq->content ?? ''}}</textarea>
                         </div>
                         @error('content')
                             <span class="text-danger ms-1">{{ $message }}</span>
@@ -93,3 +92,13 @@
     </div>
 </div>
 @stop
+@section('script')
+    <script>
+        $(document).ready(function() {
+            if ('{{$attr}}' == 'disabled') {
+			    $('#floatingTextarea2').summernote('disable') 
+            }
+			$('#floatingTextarea2').summernote();
+		});
+    </script>
+@endsection
