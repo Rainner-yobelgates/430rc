@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/panel/faq/{faq:id}/edit', [FaqController::class, 'edit'])->name('panel.faq.edit');
     Route::patch('/panel/faq/{faq:id}/update', [FaqController::class, 'update'])->name('panel.faq.update');
     Route::delete('/panel/faq/{faq:id}/delete', [FaqController::class, 'delete'])->name('panel.faq.delete');
+    // Gallery
+    Route::get('/panel/gallery', [GalleryController::class, 'index'])->name('panel.gallery.index');
+    Route::get('/panel/gallery/data', [GalleryController::class, 'data'])->name('panel.gallery.data');
+    Route::get('/panel/gallery/create', [GalleryController::class, 'create'])->name('panel.gallery.create');
+    Route::post('/panel/gallery/store', [GalleryController::class, 'store'])->name('panel.gallery.store');
+    Route::get('/panel/gallery/{gallery:id}/show', [GalleryController::class, 'show'])->name('panel.gallery.show');
+    Route::get('/panel/gallery/{gallery:id}/edit', [GalleryController::class, 'edit'])->name('panel.gallery.edit');
+    Route::patch('/panel/gallery/{gallery:id}/update', [GalleryController::class, 'update'])->name('panel.gallery.update');
+    Route::delete('/panel/gallery/{gallery:id}/delete', [GalleryController::class, 'delete'])->name('panel.gallery.delete');
     
+    //Settings
     Route::get('/panel/setting', [SettingController::class, 'index'])->name('panel.setting.index');
     Route::patch('/panel/setting/update', [SettingController::class, 'update'])->name('panel.setting.update');
 });

@@ -40,6 +40,11 @@
                             <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                         </a>
 					</li>
+					<li class="sidebar-item {{ $active == "gallery" ? "active" : "" }}">
+						<a class="sidebar-link" href="{{route('panel.gallery.index')}}">
+                            <i class="align-middle" data-feather="image"></i> <span class="align-middle">Gallery</span>
+                        </a>
+					</li>
 					<li class="sidebar-item {{ $active == "faq" ? "active" : "" }}">
 						<a class="sidebar-link" href="{{route('panel.faq.index')}}">
                             <i class="align-middle" data-feather="help-circle"></i> <span class="align-middle">Faq</span>

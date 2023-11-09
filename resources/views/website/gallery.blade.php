@@ -5,31 +5,14 @@
 <section class="gallery mt-5">
     <div class="container mt-4">
         <div class="row">
-            <h1 class="text-center fw-bold">Our Gallery</h1>
-            <div class="col-lg-4 col-sm-6 mb-3">
-                <img src="{{asset('assets/website/image/g1.png')}}" class="img-fluid" alt="image gallery">
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-3">
-                <img src="{{asset('assets/website/image/g2.png')}}" class="img-fluid" alt="image gallery">
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-3">
-                <img src="{{asset('assets/website/image/g3.png')}}" class="img-fluid" alt="image gallery">
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-3">
-                <img src="{{asset('assets/website/image/g4.png')}}" class="img-fluid" alt="image gallery">
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-3">
-                <img src="{{asset('assets/website/image/g5.png')}}" class="img-fluid" alt="image gallery">
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-3">
-                <img src="{{asset('assets/website/image/g6.png')}}" class="img-fluid" alt="image gallery">
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-3">
-                <img src="{{asset('assets/website/image/g7.png')}}" class="img-fluid" alt="image gallery">
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-3">
-                <img src="{{asset('assets/website/image/g8.png')}}" class="img-fluid" alt="image gallery">
-            </div>
+            <h1 class="text-center fw-bold mb-3">Our Gallery</h1>
+            @if (isset($getGallery))
+            @foreach ($getGallery as $gallery)
+                <div class="col-lg-4 col-sm-6 mb-3">
+                    <img src="{{asset('storage/'. $gallery->image)}}" class="img-fluid" alt="image gallery">
+                </div>
+            @endforeach
+            @endif
         </div>
     </div>
 </section>
