@@ -14,4 +14,25 @@ function get_list_status()
         99 => 'Inactive'
     ];
 }
+function list_category_product()
+{
+    return [
+        1 => 'Shirt',
+        2 => 'Drinking Bottle',
+        3 => 'Sock'
+    ];
+}
+function list_size_product()
+{
+    return [
+        'S',
+        'M',
+        'L',
+        'XL',
+        'XXL',
+        '250 Ml',
+        '500 Ml',
+        'All Size',
+    ];
+}
 ?>
