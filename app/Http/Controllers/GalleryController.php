@@ -65,7 +65,7 @@ class GalleryController extends Controller
             $data['image'] = $request->file('image')->store('uploads/presenter');
         }
         $gallery->update($data);
-        return redirect(route('panel.gallery.show', $gallery->id))->with('success', 'Gallery created successfully');
+        return redirect(route('panel.gallery.show', $gallery->id))->with('success', 'Gallery updated successfully');
     }
     
     public function delete(Gallery $gallery){

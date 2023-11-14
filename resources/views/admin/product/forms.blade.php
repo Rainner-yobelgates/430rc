@@ -134,6 +134,30 @@
             </div>
         </form>
         </div>
+        @if ($viewType == 'show')
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h5>Attribute {{$product->name}}</h5>
+                <a href="{{route('panel.product.attribute.create', $product->id)}}" class="btn btn-primary"><i class="fas fa-plus text-white ml-0"></i> Create</a>        
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Color</th>
+                                <th>Size</th>
+                                <th>status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>                
+                    </table>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 </div>
 @stop
@@ -146,4 +170,24 @@
 			$('#floatingTextarea2').summernote();
 		});
     </script>
+    @if ($viewType == 'show')
+    <script>
+        function datatable() {
+            $('#table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('panel.product.attribute.data', $product->id) }}/",
+                columns: [
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex', class:"align-middle"},
+                    {data: 'product_id', name: 'product_id', class:"align-middle"},
+                    {data: 'color_id', name: 'color_id', class:"align-middle"},
+                    {data: 'size', name: 'size', class:"align-middle"},
+                    {data: 'status', name: 'status', class:"align-middle"},
+                    {data: 'action', name: 'action', class:"align-middle"},
+                ]
+            }); 
+        }
+        datatable()
+    </script>
+    @endif
 @endsection

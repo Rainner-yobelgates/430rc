@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Attribute;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     protected $passingData;
+    protected $passingAttributeData;
     public function __construct()
     {
         $this->passingData = [
@@ -21,6 +23,12 @@ class ProductController extends Controller
             'category' => 'required',
             'description' => 'required',
             'weight' => 'required|numeric',
+            'status' => 'required|numeric',
+        ];
+
+        $this->passingData = [
+            'color_id' => 'required|numeric',
+            'size' => 'required',
             'status' => 'required|numeric',
         ];
     }
@@ -71,7 +79,7 @@ class ProductController extends Controller
             $data['image'] = $request->file('image')->store('uploads/presenter');
         }
         $product->update($data);
-        return redirect(route('panel.product.show', $product->id))->with('success', 'Product created successfully');
+        return redirect(route('panel.product.show', $product->id))->with('success', 'Product updated successfully');
     }
     
     public function delete(Product $product){
@@ -95,6 +103,78 @@ class ProductController extends Controller
                         'Rp. ' . number_format($row->price),
                     ];
                 })
+                ->editColumn('status', function ($row) {
+                    return [
+                        get_list_status()[$row->status],
+                    ];
+                })
+                ->addColumn('action', function ($row) {
+                    $btn = '
+                    <div class="d-flex align-items-center">
+                        <a href="'.route('panel.product.show',[$row->id]).'" class="btn btn-info btn-edit mb-0 me-2"><i class="fas fa-eye"></i></a>
+                        <a href="'.route('panel.product.edit',[$row->id]).'" class="btn btn-primary btn-edit mb-0 me-2"><i class="fas fa-edit"></i></a>
+                        <form action="'.route('panel.product.delete', [$row->id]).'" method="POST">
+                            '.csrf_field().'
+                            '.method_field ("delete").'
+                            <button type="submit" class="btn btn-danger mb-0">
+                            <i class="fas fa-trash"></i></button>
+                        </form>
+                    </div>
+                    ';
+                    return $btn;
+                })
+                ->make(true);
+        }
+    }
+
+    public function attributeCreate(Product $product){
+        $title = 'Create Attribute';
+        $viewType = 'create';
+        $active = 'product';
+        return view('admin.product.attribute.forms', compact('viewType', 'title', 'active', 'product'));
+    }
+
+    public function attributeShow(Product $product, Attribute $attribute){
+        $title = 'Show Attribute';
+        $viewType = 'show';
+        $active = 'product';
+        return view('admin.product.attribute.forms', compact('product', 'attribute', 'viewType', 'title', 'active'));
+    }
+
+    public function attributeStore(Product $product, Request $request){
+        $data = $this->validate($request, $this->passingAttributeData);
+        $data['product_id'] = $product->id;
+
+        $getAttribute = Attribute::create($data);
+        return redirect(route('panel.product.attribute.show', [$product->id, $getAttribute->id]))->with('success', 'Attribute created successfully');
+    }
+
+    public function attributeEdit(Product $product, Attribute $attribute){
+        $title = 'Edit Attribute';
+        $viewType = 'edit';
+        $active = 'product';
+        return view('admin.product.attribute.forms', compact('product', 'attribute', 'viewType', 'title', 'active'));
+    }
+
+    public function attributeUpdate(Product $product, Attribute $attribute, Request $request){
+        $data = $this->validate($request, $this->passingAttributeData);
+        
+        $attribute->update($data);
+        return redirect(route('panel.product.show', [$product->id, $attribute->id]))->with('success', 'Attribute updated successfully');
+    }
+    
+    public function attributeDelete(Product $product, Attribute $attribute){
+        $attribute->delete();
+        return redirect(route('panel.product.show', $product->id))->with('success', 'Product deleted successfully');
+    }
+
+    public function attributeData(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Attribute::where('product_id', $request->id)->get();
+            return DataTables::of($data)
+                ->addIndexColumn()                
+                ->rawColumns(['product_id', 'color_id', 'size', 'status', 'action'])
                 ->editColumn('status', function ($row) {
                     return [
                         get_list_status()[$row->status],

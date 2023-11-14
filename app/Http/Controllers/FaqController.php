@@ -59,7 +59,7 @@ class FaqController extends Controller
         $data = $this->validate($request, $this->passingData);
         
         $faq->update($data);
-        return redirect(route('panel.faq.show', $faq->id))->with('success', 'Faq created successfully');
+        return redirect(route('panel.faq.show', $faq->id))->with('success', 'Faq updated successfully');
     }
     
     public function delete(Faq $faq){

@@ -58,7 +58,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/panel/product/{product:id}/edit', [ProductController::class, 'edit'])->name('panel.product.edit');
     Route::patch('/panel/product/{product:id}/update', [ProductController::class, 'update'])->name('panel.product.update');
     Route::delete('/panel/product/{product:id}/delete', [ProductController::class, 'delete'])->name('panel.product.delete');
-    
+    //Product Attribute
+    Route::get('/panel/product/attribute/data', [ProductController::class, 'attributeData'])->name('panel.product.attribute.data');
+    Route::get('/panel/product/{product:id}/attribute/create', [ProductController::class, 'attributeCreate'])->name('panel.product.attribute.create');
+    Route::post('/panel/product/{product:id}/attribute/store', [ProductController::class, 'attributeStore'])->name('panel.product.attribute.store');
+    Route::get('/panel/product/{product:id}/attribute/{attribute:id}show', [ProductController::class, 'attributeShow'])->name('panel.product.attribute.show');
+    Route::get('/panel/product/{product:id}/attribute/{attribute:id}edit', [ProductController::class, 'attributeEdit'])->name('panel.product.attribute.edit');
+    Route::patch('/panel/product/{product:id}/attribute/{attribute:id}/update', [ProductController::class, 'attributeUpdate'])->name('panel.product.attribute.update');
+    Route::delete('/panel/product/{product:id}/attribute/{attribute:id}/delete', [ProductController::class, 'attributeDelete'])->name('panel.product.attribute.delete');
     //Settings
     Route::get('/panel/setting', [SettingController::class, 'index'])->name('panel.setting.index');
     Route::patch('/panel/setting/update', [SettingController::class, 'update'])->name('panel.setting.update');
