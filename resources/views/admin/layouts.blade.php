@@ -36,32 +36,32 @@
 					</li>
 
 					<li class="sidebar-item {{ $active == "dashboard" ? "active" : "" }}">
-						<a class="sidebar-link" href="{{route('panel.dashboard')}}">
+						<a class="sidebar-link d-flex align-items-center" href="{{route('panel.dashboard')}}">
                             <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                         </a>
 					</li>
 					<li class="sidebar-item {{ $active == "gallery" ? "active" : "" }}">
-						<a class="sidebar-link" href="{{route('panel.gallery.index')}}">
+						<a class="sidebar-link d-flex align-items-center" href="{{route('panel.gallery.index')}}">
                             <i class="fa-solid fa-image" style="font-size: 18px;"></i> <span class="align-middle">Gallery</span>
                         </a>
 					</li>
 					<li class="sidebar-item {{ $active == "color" ? "active" : "" }}">
-						<a class="sidebar-link" href="{{route('panel.color.index')}}">
+						<a class="sidebar-link d-flex align-items-center" href="{{route('panel.color.index')}}">
                             <i class="fa-solid fa-droplet" style="font-size: 18px;"></i> <span class="align-middle">Color</span>
                         </a>
 					</li>
 					<li class="sidebar-item {{ $active == "product" ? "active" : "" }}">
-						<a class="sidebar-link" href="{{route('panel.product.index')}}">
+						<a class="sidebar-link d-flex align-items-center" href="{{route('panel.product.index')}}">
                             <i class="fa-solid fa-box" style="font-size: 18px;"></i> <span class="align-middle">Product</span>
                         </a>
 					</li>
 					<li class="sidebar-item {{ $active == "faq" ? "active" : "" }}">
-						<a class="sidebar-link" href="{{route('panel.faq.index')}}">
+						<a class="sidebar-link d-flex align-items-center" href="{{route('panel.faq.index')}}">
                             <i class="fa-solid fa-question-circle" style="font-size: 18px;"></i> <span class="align-middle">Faq</span>
                         </a>
 					</li>
 					<li class="sidebar-item {{ $active == "setting" ? "active" : "" }}">
-						<a class="sidebar-link" href="{{route('panel.setting.index')}}">
+						<a class="sidebar-link d-flex align-items-center" href="{{route('panel.setting.index')}}">
                             <i class="fa-solid fa-gear align-middle" style="font-size: 18px;"></i> <span class="align-middle">Setting</span>
                         </a>
 					</li>

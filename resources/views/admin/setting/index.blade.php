@@ -7,10 +7,8 @@
             <form action="{{route('panel.setting.update')}}" method="post" enctype="multipart/form-data">
             @method('patch')
             @csrf
-            <div class="card-header">
-                <h5>{{$title}}</h5>
-            </div>
             <div class="card-body">
+                <h5>{{$title}}</h5>
                 <div class="form-group row mb-2">
                     <label class="col-sm-2 col-form-label">Banner Header</label>
                     <div class="col-sm-10">
@@ -89,7 +87,7 @@
                         @enderror
                     </div>
                 </div>
-                <hr>
+                <hr class="my-4">
                 <h5>About Page</h5>
                 <div class="form-group row mb-2">
                     <label class="col-sm-2 col-form-label">About Image</label>
@@ -119,10 +117,6 @@
                 <button type="submit" class="mb-2 mr-2 btn btn-success" title="Save">
                     <i class="fas fa-save"></i><span> Save</span>
                 </button>
-                <a href="{{route('panel.setting.index')}}" class="mb-2 mr-2 btn btn-warning"
-                   title="Back">
-                    <i class="fas fa-arrow-left"></i><span> Back</span>
-                </a>
             </div>
         </form>
         </div>

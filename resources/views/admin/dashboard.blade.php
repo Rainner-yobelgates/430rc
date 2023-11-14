@@ -12,20 +12,16 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col mt-0">
-									<h5 class="card-title">Sales</h5>
+									<h5 class="card-title">Product</h5>
 								</div>
 
 								<div class="col-auto">
 									<div class="stat text-primary">
-										<i class="align-middle" data-feather="truck"></i>
+										<i class="fa-solid fa-box"></i>
 									</div>
 								</div>
 							</div>
-							<h1 class="mt-1 mb-3">2.382</h1>
-							<div class="mb-0">
-								<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-								<span class="text-muted">Since last week</span>
-							</div>
+							<h1 class="mt-1 mb-3">{{$countProduct}}</h1>
 						</div>
 					</div>										
 				</div>
@@ -34,20 +30,16 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col mt-0">
-									<h5 class="card-title">Visitors</h5>
+									<h5 class="card-title">Gallery</h5>
 								</div>
 
 								<div class="col-auto">
 									<div class="stat text-primary">
-										<i class="align-middle" data-feather="users"></i>
+										<i class="fa-solid fa-image"></i>
 									</div>
 								</div>
 							</div>
-							<h1 class="mt-1 mb-3">14.212</h1>
-							<div class="mb-0">
-								<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-								<span class="text-muted">Since last week</span>
-							</div>
+							<h1 class="mt-1 mb-3">{{$countGallery}}</h1>
 						</div>
 					</div>
 				</div>
@@ -56,20 +48,16 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col mt-0">
-									<h5 class="card-title">Earnings</h5>
+									<h5 class="card-title">FAQ</h5>
 								</div>
 
 								<div class="col-auto">
 									<div class="stat text-primary">
-										<i class="align-middle" data-feather="dollar-sign"></i>
+										<i class="fa-solid fa-question-circle"></i>
 									</div>
 								</div>
 							</div>
-							<h1 class="mt-1 mb-3">$21.300</h1>
-							<div class="mb-0">
-								<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-								<span class="text-muted">Since last week</span>
-							</div>
+							<h1 class="mt-1 mb-3">{{$countFaq}}</h1>
 						</div>
 					</div>
 				</div>
@@ -78,20 +66,16 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col mt-0">
-									<h5 class="card-title">Orders</h5>
+									<h5 class="card-title">Color</h5>
 								</div>
 
 								<div class="col-auto">
 									<div class="stat text-primary">
-										<i class="align-middle" data-feather="shopping-cart"></i>
+										<i class="fa-solid fa-droplet"></i>
 									</div>
 								</div>
 							</div>
-							<h1 class="mt-1 mb-3">64</h1>
-							<div class="mb-0">
-								<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
-								<span class="text-muted">Since last week</span>
-							</div>
+							<h1 class="mt-1 mb-3">{{$countColor}}</h1>
 						</div>
 					</div>
 				</div>

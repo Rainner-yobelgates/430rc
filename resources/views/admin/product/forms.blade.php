@@ -101,7 +101,7 @@
                     <label class="col-sm-2 col-form-label">Status <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
                         <select name="status" class="form-control" {{$attr}}>
-                            @foreach (get_list_status() as $key => $item)
+                            @foreach (get_list_status_product() as $key => $item)
                             <option value="{{ $key }}" {{isset($product->status) && $key == $product->status ? 'selected' : ''}}>{{ $item }}</option>
                             @endforeach
                         </select>

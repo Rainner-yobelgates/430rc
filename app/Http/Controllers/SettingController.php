@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class SettingController extends Controller
 {
     public function index(){
-        $title = 'Setting Page';
+        $title = 'Setting';
         $active = 'setting';
 
         $settings = Setting::pluck('value', 'key')->toArray();
