@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Color;
 use App\Models\Product;
 use App\Models\Attribute;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +28,7 @@ class ProductController extends Controller
             'status' => 'required|numeric',
         ];
 
-        $this->passingData = [
+        $this->passingAttributeData = [
             'color_id' => 'required|numeric',
             'size' => 'required',
             'status' => 'required|numeric',
@@ -131,18 +133,30 @@ class ProductController extends Controller
         $title = 'Create Attribute';
         $viewType = 'create';
         $active = 'product';
-        return view('admin.product.attribute.forms', compact('viewType', 'title', 'active', 'product'));
+        $getColor = Color::where('status', 80)->pluck('name', 'id')->toArray();
+        return view('admin.product.attribute.forms', compact('viewType', 'getColor', 'title', 'active', 'product'));
     }
 
     public function attributeShow(Product $product, Attribute $attribute){
         $title = 'Show Attribute';
         $viewType = 'show';
         $active = 'product';
-        return view('admin.product.attribute.forms', compact('product', 'attribute', 'viewType', 'title', 'active'));
+        $getColor = Color::where('status', 80)->pluck('name', 'id')->toArray();
+        return view('admin.product.attribute.forms', compact('product', 'getColor', 'attribute', 'viewType', 'title', 'active'));
     }
 
     public function attributeStore(Product $product, Request $request){
-        $data = $this->validate($request, $this->passingAttributeData);
+        $this->passingAttributeData['color_id'] = [
+            'required', 
+            'numeric', 
+            Rule::unique('attributes')->where(function ($query) use($request) {
+                return $query->where('color_id', $request->color_id)
+                ->where('size', $request->size);
+            }),
+        ];
+        $data = $this->validate($request, $this->passingAttributeData,[
+            'color_id.unique' => 'The same color and size already exist',
+        ]);
         $data['product_id'] = $product->id;
 
         $getAttribute = Attribute::create($data);
@@ -153,7 +167,8 @@ class ProductController extends Controller
         $title = 'Edit Attribute';
         $viewType = 'edit';
         $active = 'product';
-        return view('admin.product.attribute.forms', compact('product', 'attribute', 'viewType', 'title', 'active'));
+        $getColor = Color::where('status', 80)->pluck('name', 'id')->toArray();
+        return view('admin.product.attribute.forms', compact('product', 'getColor', 'attribute', 'viewType', 'title', 'active'));
     }
 
     public function attributeUpdate(Product $product, Attribute $attribute, Request $request){
@@ -168,24 +183,36 @@ class ProductController extends Controller
         return redirect(route('panel.product.show', $product->id))->with('success', 'Product deleted successfully');
     }
 
-    public function attributeData(Request $request)
+    public function attributeData(Product $product, Request $request)
     {
         if ($request->ajax()) {
-            $data = Attribute::where('product_id', $request->id)->get();
+            $data = Attribute::where('product_id', $product->id)->get();
+            $getProduct = Product::pluck('name', 'id')->toArray();
+            $getColor = Color::pluck('name', 'id')->toArray();
             return DataTables::of($data)
                 ->addIndexColumn()                
                 ->rawColumns(['product_id', 'color_id', 'size', 'status', 'action'])
+                ->editColumn('product_id', function ($row) use ($getProduct) {
+                    return [
+                        $getProduct[$row->product_id],
+                    ];
+                })
+                ->editColumn('color_id', function ($row) use ($getColor) {
+                    return [
+                        $getColor[$row->color_id],
+                    ];
+                })
                 ->editColumn('status', function ($row) {
                     return [
                         get_list_status()[$row->status],
                     ];
                 })
-                ->addColumn('action', function ($row) {
+                ->addColumn('action', function ($row) use ($product) {
                     $btn = '
                     <div class="d-flex align-items-center">
-                        <a href="'.route('panel.product.show',[$row->id]).'" class="btn btn-info btn-edit mb-0 me-2"><i class="fas fa-eye"></i></a>
-                        <a href="'.route('panel.product.edit',[$row->id]).'" class="btn btn-primary btn-edit mb-0 me-2"><i class="fas fa-edit"></i></a>
-                        <form action="'.route('panel.product.delete', [$row->id]).'" method="POST">
+                        <a href="'.route('panel.product.attribute.show',[$product->id, $row->id]).'" class="btn btn-info btn-edit mb-0 me-2"><i class="fas fa-eye"></i></a>
+                        <a href="'.route('panel.product.attribute.edit',[$product->id, $row->id]).'" class="btn btn-primary btn-edit mb-0 me-2"><i class="fas fa-edit"></i></a>
+                        <form action="'.route('panel.product.attribute.delete', [$product->id, $row->id]).'" method="POST">
                             '.csrf_field().'
                             '.method_field ("delete").'
                             <button type="submit" class="btn btn-danger mb-0">

@@ -36,7 +36,7 @@
                     <div class="col-sm-10">
                         <select name="status" class="form-control" {{$attr}}>
                             @foreach (get_list_status() as $key => $item)
-                            <option value="{{ $key }}">{{ $item }}</option>
+                            <option value="{{ $key }}" {{isset($color->status) && $key == $color->status ? 'selected' : ''}}>{{ $item }}</option>
                             @endforeach
                         </select>
                         @error('status')

@@ -60,7 +60,7 @@
                     <div class="col-sm-10">
                         <select name="category" class="form-control" {{$attr}}>
                             @foreach (list_category_product() as $key => $item)
-                            <option value="{{ $item }}">{{ $item }}</option>
+                            <option value="{{ $item }}" {{isset($product->category) && $key == $product->category ? 'selected' : ''}}>{{ $item }}</option>
                             @endforeach
                         </select>
                         @error('category')
@@ -102,7 +102,7 @@
                     <div class="col-sm-10">
                         <select name="status" class="form-control" {{$attr}}>
                             @foreach (get_list_status() as $key => $item)
-                            <option value="{{ $key }}">{{ $item }}</option>
+                            <option value="{{ $key }}" {{isset($product->status) && $key == $product->status ? 'selected' : ''}}>{{ $item }}</option>
                             @endforeach
                         </select>
                         @error('status')
