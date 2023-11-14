@@ -42,17 +42,22 @@
 					</li>
 					<li class="sidebar-item {{ $active == "gallery" ? "active" : "" }}">
 						<a class="sidebar-link" href="{{route('panel.gallery.index')}}">
-                            <i class="align-middle" data-feather="image"></i> <span class="align-middle">Gallery</span>
+                            <i class="fa-solid fa-image" style="font-size: 18px;"></i> <span class="align-middle">Gallery</span>
+                        </a>
+					</li>
+					<li class="sidebar-item {{ $active == "color" ? "active" : "" }}">
+						<a class="sidebar-link" href="{{route('panel.color.index')}}">
+                            <i class="fa-solid fa-droplet" style="font-size: 18px;"></i> <span class="align-middle">Color</span>
                         </a>
 					</li>
 					<li class="sidebar-item {{ $active == "product" ? "active" : "" }}">
 						<a class="sidebar-link" href="{{route('panel.product.index')}}">
-                            <i class="align-middle" data-feather="box"></i> <span class="align-middle">Product</span>
+                            <i class="fa-solid fa-box" style="font-size: 18px;"></i> <span class="align-middle">Product</span>
                         </a>
 					</li>
 					<li class="sidebar-item {{ $active == "faq" ? "active" : "" }}">
 						<a class="sidebar-link" href="{{route('panel.faq.index')}}">
-                            <i class="align-middle" data-feather="help-circle"></i> <span class="align-middle">Faq</span>
+                            <i class="fa-solid fa-question-circle" style="font-size: 18px;"></i> <span class="align-middle">Faq</span>
                         </a>
 					</li>
 					<li class="sidebar-item {{ $active == "setting" ? "active" : "" }}">

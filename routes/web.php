@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ColorController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
@@ -66,6 +67,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/panel/product/{product:id}/attribute/{attribute:id}edit', [ProductController::class, 'attributeEdit'])->name('panel.product.attribute.edit');
     Route::patch('/panel/product/{product:id}/attribute/{attribute:id}/update', [ProductController::class, 'attributeUpdate'])->name('panel.product.attribute.update');
     Route::delete('/panel/product/{product:id}/attribute/{attribute:id}/delete', [ProductController::class, 'attributeDelete'])->name('panel.product.attribute.delete');
+     // Color
+     Route::get('/panel/color', [ColorController::class, 'index'])->name('panel.color.index');
+     Route::get('/panel/color/data', [ColorController::class, 'data'])->name('panel.color.data');
+     Route::get('/panel/color/create', [ColorController::class, 'create'])->name('panel.color.create');
+     Route::post('/panel/color/store', [ColorController::class, 'store'])->name('panel.color.store');
+     Route::get('/panel/color/{color:id}/show', [ColorController::class, 'show'])->name('panel.color.show');
+     Route::get('/panel/color/{color:id}/edit', [ColorController::class, 'edit'])->name('panel.color.edit');
+     Route::patch('/panel/color/{color:id}/update', [ColorController::class, 'update'])->name('panel.color.update');
+     Route::delete('/panel/color/{color:id}/delete', [ColorController::class, 'delete'])->name('panel.color.delete');
     //Settings
     Route::get('/panel/setting', [SettingController::class, 'index'])->name('panel.setting.index');
     Route::patch('/panel/setting/update', [SettingController::class, 'update'])->name('panel.setting.update');
