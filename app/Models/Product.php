@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -16,6 +17,10 @@ class Product extends Model
         'category',
         'description',
         'weight',
+        'order',
         'status',
     ];
+    public function attributes(){
+        return $this->hasMany(Attribute::class);
+    }
 }

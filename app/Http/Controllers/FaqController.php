@@ -87,6 +87,7 @@ class FaqController extends Controller
                 ->addColumn('action', function ($row) {
                     $btn = '
                     <div class="d-flex align-items-center">
+                        <a href="'.route('panel.faq.show',[$row->id]).'" class="btn btn-info btn-edit mb-0 me-2"><i class="fas fa-eye"></i></a>
                         <a href="'.route('panel.faq.edit',[$row->id]).'" class="btn btn-primary btn-edit mb-0 me-2"><i class="fas fa-edit"></i></a>
                         <form action="'.route('panel.faq.delete', [$row->id]).'" method="POST">
                             '.csrf_field().'

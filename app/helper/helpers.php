@@ -17,9 +17,9 @@ function get_list_status()
 function list_category_product()
 {
     return [
-        1 => 'Shirt',
-        2 => 'Drinking Bottle',
-        3 => 'Sock'
+        'Shirt',
+        'Drinking Bottle',
+        'Sock'
     ];
 }
 function list_size_product()

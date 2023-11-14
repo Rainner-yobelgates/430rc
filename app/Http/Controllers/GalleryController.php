@@ -42,12 +42,13 @@ class GalleryController extends Controller
     }
 
     public function store(Request $request){
+        $this->passingData['image'] = 'required|image|mimes:jpeg,png,jpg|max:3072';
         $data = $this->validate($request, $this->passingData);
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('uploads/gallery');
         }
-        $getFaq = Gallery::create($data);
-        return redirect(route('panel.gallery.show', $getFaq->id))->with('success', 'Gallery created successfully');
+        $getGallery = Gallery::create($data);
+        return redirect(route('panel.gallery.show', $getGallery->id))->with('success', 'Gallery created successfully');
     }
 
     public function edit(Gallery $gallery){
@@ -91,6 +92,7 @@ class GalleryController extends Controller
                 ->addColumn('action', function ($row) {
                     $btn = '
                     <div class="d-flex align-items-center">
+                        <a href="'.route('panel.gallery.show',[$row->id]).'" class="btn btn-info btn-edit mb-0 me-2"><i class="fas fa-eye"></i></a>
                         <a href="'.route('panel.gallery.edit',[$row->id]).'" class="btn btn-primary btn-edit mb-0 me-2"><i class="fas fa-edit"></i></a>
                         <form action="'.route('panel.gallery.delete', [$row->id]).'" method="POST">
                             '.csrf_field().'

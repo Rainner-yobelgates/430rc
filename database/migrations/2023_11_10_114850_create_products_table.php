@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('category')->nullable();
             $table->longText('description')->nullable();
             $table->integer('weight')->default(0);
+            $table->integer('order')->default(1);
             $table->tinyInteger('status')->default(80);
             $table->timestamps();
         });

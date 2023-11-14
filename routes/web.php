@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\DashboardController;
@@ -48,6 +49,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/panel/gallery/{gallery:id}/edit', [GalleryController::class, 'edit'])->name('panel.gallery.edit');
     Route::patch('/panel/gallery/{gallery:id}/update', [GalleryController::class, 'update'])->name('panel.gallery.update');
     Route::delete('/panel/gallery/{gallery:id}/delete', [GalleryController::class, 'delete'])->name('panel.gallery.delete');
+    // Product
+    Route::get('/panel/product', [ProductController::class, 'index'])->name('panel.product.index');
+    Route::get('/panel/product/data', [ProductController::class, 'data'])->name('panel.product.data');
+    Route::get('/panel/product/create', [ProductController::class, 'create'])->name('panel.product.create');
+    Route::post('/panel/product/store', [ProductController::class, 'store'])->name('panel.product.store');
+    Route::get('/panel/product/{product:id}/show', [ProductController::class, 'show'])->name('panel.product.show');
+    Route::get('/panel/product/{product:id}/edit', [ProductController::class, 'edit'])->name('panel.product.edit');
+    Route::patch('/panel/product/{product:id}/update', [ProductController::class, 'update'])->name('panel.product.update');
+    Route::delete('/panel/product/{product:id}/delete', [ProductController::class, 'delete'])->name('panel.product.delete');
     
     //Settings
     Route::get('/panel/setting', [SettingController::class, 'index'])->name('panel.setting.index');

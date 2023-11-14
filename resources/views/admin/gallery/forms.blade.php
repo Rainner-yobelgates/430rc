@@ -22,14 +22,14 @@
             </div>
             <div class="card-body">
                 <div class="form-group row mb-2">
-                    <label class="col-sm-2 col-form-label">Image</label>
+                    <label class="col-sm-2 col-form-label">Image <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
                         @isset($gallery->image)
                         <div class="mb-2 border" style="width: 200px">
                             <img src="{{asset('storage/'. $gallery->image)}}" class="img-fluid" style="object-fit: contain;" alt="user photo">
                         </div> 
                         @endisset
-                        <input type="file" name="image" class="form-control">
+                        <input type="file" name="image" class="form-control" {{$attr}}>
                         @error('image')
                             <span class="text-danger ms-1">{{ $message }}</span>
                         @enderror

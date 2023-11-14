@@ -1,13 +1,13 @@
 @extends('admin.layouts')
 @section('title', $title)
 @section('content')
-<h1 class="h3 mb-3">Gallery</h1>
+<h1 class="h3 mb-3">Product</h1>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h4 class="mb-0">{{$title}}</h4>
-                <a href="{{route('panel.gallery.create')}}" class="btn btn-primary"><i class="fas fa-plus text-white ml-0"></i> Create</a>        
+                <a href="{{route('panel.product.create')}}" class="btn btn-primary"><i class="fas fa-plus text-white ml-0"></i> Create</a>        
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -15,7 +15,11 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Name</th>
+                                <th>Price</th>
                                 <th>Image</th>
+                                <th>Category</th>
+                                <th>Weight</th>
                                 <th>Order</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -34,10 +38,14 @@
             $('#table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('panel.gallery.data') }}/",
+                ajax: "{{ route('panel.product.data') }}/",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex', class:"align-middle"},
+                    {data: 'name', name: 'name', class:"align-middle"},
+                    {data: 'price', name: 'price', class:"align-middle"},
                     {data: 'image', name: 'image', class:"align-middle"},
+                    {data: 'category', name: 'category', class:"align-middle"},
+                    {data: 'weight', name: 'weight', class:"align-middle"},
                     {data: 'order', name: 'order', class:"align-middle"},
                     {data: 'status', name: 'status', class:"align-middle"},
                     {data: 'action', name: 'action', class:"align-middle"},
