@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Color;
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\Attribute;
 use Illuminate\Support\Str;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     protected $passingData;
+    protected $passingImageData;
     protected $passingAttributeData;
     public function __construct()
     {
@@ -31,6 +33,11 @@ class ProductController extends Controller
         $this->passingAttributeData = [
             'color_id' => 'required|numeric',
             'size' => 'required',
+            'status' => 'required|numeric',
+        ];
+
+        $this->passingImageData = [
+            'image' => 'image|mimes:jpeg,png,jpg|max:3072',
             'status' => 'required|numeric',
         ];
     }
@@ -85,6 +92,9 @@ class ProductController extends Controller
     }
     
     public function delete(Product $product){
+        if ($product->image) {
+            Storage::delete($product->image);
+        }
         $product->delete();
         return redirect(route('panel.product.index'))->with('success', 'Product deleted successfully');
     }
@@ -97,7 +107,7 @@ class ProductController extends Controller
                 ->addIndexColumn()                
                 ->rawColumns(['name', 'price', 'image', 'category', 'weight', 'order', 'status', 'action'])
                 ->editColumn('image', function ($row) {
-                    $image = '<img src="'.asset("storage/". $row->image).'" class="img-fluid" style="width:75px;height:75px;object-fit: contain;" alt="user photo">';
+                    $image = '<img src="'.asset("storage/". $row->image).'" class="img-fluid" style="width:75px;height:75px;object-fit: contain;" alt="Product image">';
                     return $image;
                 })
                 ->editColumn('price', function ($row) {
@@ -213,6 +223,98 @@ class ProductController extends Controller
                         <a href="'.route('panel.product.attribute.show',[$product->id, $row->id]).'" class="btn btn-info btn-edit mb-0 me-2"><i class="fas fa-eye"></i></a>
                         <a href="'.route('panel.product.attribute.edit',[$product->id, $row->id]).'" class="btn btn-primary btn-edit mb-0 me-2"><i class="fas fa-edit"></i></a>
                         <form action="'.route('panel.product.attribute.delete', [$product->id, $row->id]).'" method="POST">
+                            '.csrf_field().'
+                            '.method_field ("delete").'
+                            <button type="submit" class="btn btn-danger mb-0">
+                            <i class="fas fa-trash"></i></button>
+                        </form>
+                    </div>
+                    ';
+                    return $btn;
+                })
+                ->make(true);
+        }
+    }
+
+    public function imageCreate(Product $product){
+        $title = 'Create Gallery Image';
+        $viewType = 'create';
+        $active = 'product';
+        return view('admin.product.image.forms', compact('viewType', 'title', 'active', 'product'));
+    }
+
+    public function imageShow(Product $product, Image $image){
+        $title = 'Show Gallery Image';
+        $viewType = 'show';
+        $active = 'product';
+        return view('admin.product.image.forms', compact('product', 'image', 'viewType', 'title', 'active'));
+    }
+
+    public function imageStore(Product $product, Request $request){
+        $this->passingImageData['image'] = 'required|image|mimes:jpeg,png,jpg|max:3072';
+        $data = $this->validate($request, $this->passingImageData);
+        $data['product_id'] = $product->id;
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('uploads/product/gallery');
+        }
+        $getImage = Image::create($data);
+        return redirect(route('panel.product.image.show', [$product->id, $getImage->id]))->with('success', 'Gallery Image created successfully');
+    }
+
+    public function imageEdit(Product $product, Image $image){
+        $title = 'Edit Gallery Image';
+        $viewType = 'edit';
+        $active = 'product';
+        return view('admin.product.image.forms', compact('product', 'image', 'viewType', 'title', 'active'));
+    }
+
+    public function imageUpdate(Product $product, Image $image, Request $request){
+        $data = $this->validate($request, $this->passingImageData);
+        if ($request->hasFile('image')) {
+            Storage::delete($image->image);
+            $data['image'] = $request->file('image')->store('uploads/product/gallery');
+        }
+        $image->update($data);
+        return redirect(route('panel.product.show', [$product->id, $image->id]))->with('success', 'Gallery Image updated successfully');
+    }
+    
+    public function imageDelete(Product $product, Image $image){
+        if ($image->image) {
+            Storage::delete($image->image);
+        }
+        $image->delete();
+        return redirect(route('panel.product.show', $product->id))->with('success', 'Gallery Image deleted successfully');
+    }
+
+    public function imageData(Product $product, Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Image::where('product_id', $product->id)->get();
+            $getProduct = Product::pluck('name', 'id')->toArray();
+            $getColor = Color::pluck('name', 'id')->toArray();
+            return DataTables::of($data)
+                ->addIndexColumn()                
+                ->rawColumns(['product_id', 'image', 'status', 'action'])
+                ->editColumn('product_id', function ($row) use ($getProduct) {
+                    return [
+                        $getProduct[$row->product_id],
+                    ];
+                })
+                ->editColumn('image', function ($row) {
+                    $image = '<img src="'.asset("storage/". $row->image).'" class="img-fluid" style="width:75px;height:75px;object-fit: contain;" alt="Gallery image product">';
+                    return $image;
+                })
+                ->editColumn('status', function ($row) {
+                    return [
+                        get_list_status()[$row->status],
+                    ];
+                })
+                ->addColumn('action', function ($row) use ($product) {
+                    $btn = '
+                    <div class="d-flex align-items-center">
+                        <a href="'.route('panel.product.image.show',[$product->id, $row->id]).'" class="btn btn-info btn-edit mb-0 me-2"><i class="fas fa-eye"></i></a>
+                        <a href="'.route('panel.product.image.edit',[$product->id, $row->id]).'" class="btn btn-primary btn-edit mb-0 me-2"><i class="fas fa-edit"></i></a>
+                        <form action="'.route('panel.product.image.delete', [$product->id, $row->id]).'" method="POST">
                             '.csrf_field().'
                             '.method_field ("delete").'
                             <button type="submit" class="btn btn-danger mb-0">

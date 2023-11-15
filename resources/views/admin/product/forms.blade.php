@@ -157,6 +157,27 @@
                 </div>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h5>Gallery Image {{$product->name}}</h5>
+                <a href="{{route('panel.product.image.create', $product->id)}}" class="btn btn-primary"><i class="fas fa-plus text-white ml-0"></i> Create</a>        
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="table2">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Image</th>
+                                <th>status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>                
+                    </table>
+                </div>
+            </div>
+        </div>
         @endif
     </div>
 </div>
@@ -188,6 +209,20 @@
             }); 
         }
         datatable()
+        function datatable2() {
+            $('#table2').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('panel.product.image.data', $product->id) }}/",
+                columns: [
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex', class:"align-middle"},
+                    {data: 'image', name: 'image', class:"align-middle"},
+                    {data: 'status', name: 'status', class:"align-middle"},
+                    {data: 'action', name: 'action', class:"align-middle"},
+                ]
+            }); 
+        }
+        datatable2()
     </script>
     @endif
 @endsection

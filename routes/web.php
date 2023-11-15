@@ -67,6 +67,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/panel/product/{product:id}/attribute/{attribute:id}/edit', [ProductController::class, 'attributeEdit'])->name('panel.product.attribute.edit');
     Route::patch('/panel/product/{product:id}/attribute/{attribute:id}/update', [ProductController::class, 'attributeUpdate'])->name('panel.product.attribute.update');
     Route::delete('/panel/product/{product:id}/attribute/{attribute:id}/delete', [ProductController::class, 'attributeDelete'])->name('panel.product.attribute.delete');
+    //Product Attribute
+    Route::get('/panel/product/{product:id}/image/data', [ProductController::class, 'imageData'])->name('panel.product.image.data');
+    Route::get('/panel/product/{product:id}/image/create', [ProductController::class, 'imageCreate'])->name('panel.product.image.create');
+    Route::post('/panel/product/{product:id}/image/store', [ProductController::class, 'imageStore'])->name('panel.product.image.store');
+    Route::get('/panel/product/{product:id}/image/{image:id}/show', [ProductController::class, 'imageShow'])->name('panel.product.image.show');
+    Route::get('/panel/product/{product:id}/image/{image:id}/edit', [ProductController::class, 'imageEdit'])->name('panel.product.image.edit');
+    Route::patch('/panel/product/{product:id}/image/{image:id}/update', [ProductController::class, 'imageUpdate'])->name('panel.product.image.update');
+    Route::delete('/panel/product/{product:id}/image/{image:id}/delete', [ProductController::class, 'imageDelete'])->name('panel.product.image.delete');
      // Color
      Route::get('/panel/color', [ColorController::class, 'index'])->name('panel.color.index');
      Route::get('/panel/color/data', [ColorController::class, 'data'])->name('panel.color.data');

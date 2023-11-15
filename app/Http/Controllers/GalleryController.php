@@ -69,6 +69,9 @@ class GalleryController extends Controller
     }
     
     public function delete(Gallery $gallery){
+        if ($gallery->image) {
+            Storage::delete($gallery->image);
+        }
         $gallery->delete();
         return redirect(route('panel.gallery.index'))->with('success', 'Gallery deleted successfully');
     }
