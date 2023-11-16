@@ -22,6 +22,7 @@
                                 <th>Weight</th>
                                 <th>Order</th>
                                 <th>Status</th>
+                                <th>Created At</th>
                                 <th>Action</th>
                             </tr>
                         </thead>                
@@ -48,6 +49,7 @@
                     {data: 'weight', name: 'weight', class:"align-middle"},
                     {data: 'order', name: 'order', class:"align-middle"},
                     {data: 'status', name: 'status', class:"align-middle"},
+                    {data: 'created_at', name: 'created_at', class:"align-middle"},
                     {data: 'action', name: 'action', class:"align-middle"},
                 ]
             }); 

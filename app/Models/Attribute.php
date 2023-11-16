@@ -12,6 +12,7 @@ class Attribute extends Model
         'product_id',
         'color_id',
         'size',
+        'order',
         'status',
     ];
 }

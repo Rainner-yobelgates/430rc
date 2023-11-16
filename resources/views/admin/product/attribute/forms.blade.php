@@ -50,6 +50,16 @@
                     </div>
                 </div>
                 <div class="form-group row mb-2">
+                    <label class="col-sm-2 col-form-label">Order <span class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                        <input type="number" name="order" value="{{ old('order', $attribute->order ?? '') }}"  class="form-control"
+                        placeholder="Input Order Field" {{$attr}}>
+                        @error('order')
+                            <span class="text-danger ms-1">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row mb-2">
                     <label class="col-sm-2 col-form-label">Status <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
                         <select name="status" class="form-control" {{$attr}}>

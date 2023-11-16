@@ -149,6 +149,7 @@
                                 <th>Name</th>
                                 <th>Color</th>
                                 <th>Size</th>
+                                <th>Order</th>
                                 <th>status</th>
                                 <th>Action</th>
                             </tr>
@@ -203,6 +204,7 @@
                     {data: 'product_id', name: 'product_id', class:"align-middle"},
                     {data: 'color_id', name: 'color_id', class:"align-middle"},
                     {data: 'size', name: 'size', class:"align-middle"},
+                    {data: 'order', name: 'order', class:"align-middle"},
                     {data: 'status', name: 'status', class:"align-middle"},
                     {data: 'action', name: 'action', class:"align-middle"},
                 ]

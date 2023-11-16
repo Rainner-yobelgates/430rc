@@ -24,7 +24,7 @@ Route::get('/', [WebsiteController::class, 'home'])->name('home');
 Route::get('/about', [WebsiteController::class, 'about'])->name('about');
 Route::get('/gallery', [WebsiteController::class, 'gallery'])->name('gallery');
 Route::get('/products', [WebsiteController::class, 'products'])->name('products');
-Route::get('/detail', [WebsiteController::class, 'detail'])->name('detail');
+Route::get('/products/{product:slugs}/detail', [WebsiteController::class, 'detail'])->name('detail');
 Route::get('/cart', [WebsiteController::class, 'cart'])->name('cart');
 
 Route::get('/panel', [AuthController::class, 'login'])->name('login');

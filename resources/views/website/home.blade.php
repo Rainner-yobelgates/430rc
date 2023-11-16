@@ -8,37 +8,36 @@
         <div class="row">
             <h1 class="fw-bold mb-3">Our Product</h1>
             <div class="owl-carousel owl-theme mt-2">
-                @for ($i = 1; $i <= 7; $i++)
+                @forelse ($getProduct as $product)
                 <div class="item">
                     <a class="nav-link p-0" href="">
                         <div class="item">
                             <div class="card">
-                                <img src="{{asset('assets/website/image/product.png')}}" class="card-img-top" alt="...">
+                                <img src="{{asset('storage/' . $product->image)}}" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                  <h6 class="card-title text-dark">Prototype 001 - Men's Tank</h6>
+                                  <h5 class="card-title text-dark">{{$product->name}}</h5>
                                   <div class="mb-3">
-                                        <div class="btn btn-light mt-2">
-                                            <p class="mb-0">S</p>
-                                        </div>
-                                        <div class="btn btn-light mt-2">
-                                            <p class="mb-0">M</p>
-                                        </div>
-                                        <div class="btn btn-light mt-2">
-                                            <p class="mb-0">L</p>
-                                        </div>
-                                        <div class="btn btn-light mt-2">
-                                            <p class="mb-0">XL</p>
-                                        </div>
+                                    @forelse ($product->attributes as $attr)
+                                    <div class="btn btn-light mt-2">
+                                        <p class="mb-0">{{$attr->size}}</p>
+                                    </div>
+                                    @empty
+                                    <div class="btn btn-light mt-2">
+                                        <p class="mb-0">No size available</p>
+                                    </div>
+                                    @endforelse
                                   </div>
-                                  <p class="card-title text-dark">Rp 300.000 IDR</p>
+                                  <p class="card-title text-dark">Rp {{number_format($product->price)}} IDR</p>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
-                @endfor
+                @empty
+                    
+                @endforelse
             </div>
-            <a class="btn btn-dark w-25 mx-auto rounded-pill mt-3" href="">View All</a>
+            <a class="btn btn-dark w-25 mx-auto rounded-pill mt-3" href="{{route('products')}}">View All</a>
         </div>
     </div>
 </section>
@@ -114,7 +113,7 @@
 <script>
     $(document).ready(function(){
         $('.owl-carousel').owlCarousel({
-            loop:true,
+            loop:false,
             margin:10,
             responsiveClass:true,
             responsive:{

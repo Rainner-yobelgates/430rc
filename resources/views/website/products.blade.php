@@ -7,7 +7,7 @@
         <div class="row">
             <h1 class="text-center fw-bold">Our Products</h1>
             <div class="d-flex align-items-center mb-4">
-                <input type="text" class="form-control me-3" placeholder="Search Product Here">
+                <input type="text" onkeyup="searchProduct(this)" id="search_product" class="form-control me-3" placeholder="Search Product Here">
                 <i class="fas fa-search" style="font-size: 30px"></i>
             </div>
             <div class="col-md-4 col-lg-3">
@@ -23,53 +23,37 @@
                     <div class="card-body collapse show" id="collapseExample">
                         <h5 class="mb-1 fw-bold">Sort</h5>
                         <p class="mb-1">
-                            <a href="?sort=latest" class="text-dark text-decoration-none">
+                            <a href="?filter=latest" class="text-dark text-decoration-none">
                             <i class="fas fa-angle-right"></i>
                                 Latest</a>
                         </p>
                         <p class="mb-1">
-                            <a href="?sort=az" class="text-dark text-decoration-none">
+                            <a href="?filter=az" class="text-dark text-decoration-none">
                             <i class="fas fa-angle-right"></i>
                                 Alphabet A-Z</a>
                         </p>
                         <p class="mb-1">
-                            <a href="?sort=za" class="text-dark text-decoration-none">
+                            <a href="?filter=za" class="text-dark text-decoration-none">
                             <i class="fas fa-angle-right"></i>
                                 Alphabet Z-A</a>
                         </p>
                         <p class="mb-1">
-                            <a href="?sort=low_price" class="text-dark text-decoration-none">
+                            <a href="?filter=low_price" class="text-dark text-decoration-none">
                             <i class="fas fa-angle-right"></i>
                                 Lowest Price</a>
                         </p>
                         <p class="mb-1">
-                            <a href="?sort=high_price" class="text-dark text-decoration-none">
+                            <a href="?filter=high_price" class="text-dark text-decoration-none">
                             <i class="fas fa-angle-right"></i>
                                 Highest Price</a>
                         </p>
                         <hr>
                         <h5 class="mb-2 fw-bold">Size</h5>
-                        <div class="btn btn-light mb-2">
-                            <p class="mb-0">S</p>
-                        </div>
-                        <div class="btn btn-light mb-2">
-                            <p class="mb-0">M</p>
-                        </div>
-                        <div class="btn btn-light mb-2">
-                            <p class="mb-0">L</p>
-                        </div>
-                        <div class="btn btn-light mb-2">
-                            <p class="mb-0">XL</p>
-                        </div>
-                        <div class="btn btn-light mb-2">
-                            <p class="mb-0">100 ML</p>
-                        </div>
-                        <div class="btn btn-light mb-2">
-                            <p class="mb-0">150 ML</p>
-                        </div>
-                        <div class="btn btn-light mb-2">
-                            <p class="mb-0">All Size</p>
-                        </div>
+                        @foreach (list_size_product() as $size)
+                            <a href="?filter={{$size}}" class="btn btn-light mb-2">
+                                <p class="mb-0">{{$size}}</p>
+                            </a>
+                        @endforeach
                         <hr>
                         <h5 class="mb-1 fw-bold">Price</h5>
                         <form id="filter" type="get">
@@ -87,39 +71,107 @@
                 </div>
             </div>
             <div class="col-md-8 col-lg-9">
-                <div class="row">
-                @for ($i = 1; $i <= 7; $i++)
+                <div class="row" id="section_product">
+                    @forelse ($getProduct as $product)
                     <div class="col-lg-4 col-md-6">
-                        <a class="nav-link p-0 mb-4" href="">
+                        <a class="nav-link p-0 mb-4" href="{{route('detail', $product->slugs)}}">
                             <div class="item">
                                 <div class="card">
-                                    <img src="{{asset('assets/website/image/product.png')}}" class="card-img-top" alt="...">
+                                    <img src="{{asset('storage/' . $product->image)}}" class="card-img-top" alt="{{$product->name}}">
                                     <div class="card-body">
-                                      <h6 class="card-title text-dark">Prototype 001 - Men's Tank</h6>
+                                      <h5 class="card-title text-dark">{{$product->name}}</h5>
                                       <div class="mb-3">
-                                            <div class="btn btn-light mt-2">
-                                                <p class="mb-0">S</p>
-                                            </div>
-                                            <div class="btn btn-light mt-2">
-                                                <p class="mb-0">M</p>
-                                            </div>
-                                            <div class="btn btn-light mt-2">
-                                                <p class="mb-0">L</p>
-                                            </div>
-                                            <div class="btn btn-light mt-2">
-                                                <p class="mb-0">XL</p>
-                                            </div>
+                                        @forelse ($product->attributes as $attr)
+                                        <div class="btn btn-light mt-2">
+                                            <p class="mb-0">{{$attr->size}}</p>
+                                        </div>
+                                        @empty
+                                        <div class="btn btn-light mt-2">
+                                            <p class="mb-0">No size available</p>
+                                        </div>
+                                        @endforelse
                                       </div>
-                                      <p class="card-title text-dark">Rp 300.000 IDR</p>
+                                      <p class="card-title text-dark">Rp {{number_format($product->price)}} IDR</p>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    @endfor
+                    @empty
+                        
+                    @endforelse
                 </div>
+                {{$getProduct->links()}}
             </div>
         </div>
     </div>
 </section>
 @stop
+@section('script')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        function searchProduct(el){
+            let keyword = $(el).val();
+            $.ajax({
+                url: '{{ route("products") }}',
+                type: 'GET',
+                data: {search: keyword},
+                success: function(response){
+                    let products = response.data;
+                    let output = '';
+                    if(products.length > 0){
+                        products.forEach(function(product){
+                            let attr = ''
+                            if (product.attributes.length > 0) {
+                                product.attributes.forEach(function (attribute, index) {
+                                    attr += '<div class="btn btn-light mt-2 me-1">'+
+                                                '<p class="mb-0">'+attribute.size+'</p>'+
+                                            '</div>';
+                                })
+                            }else{
+                                attr = '<div class="btn btn-light mt-2">'+
+                                            '<p class="mb-0">No size available</p>'+
+                                        '</div>';
+                            }
+                            let asset = '{{asset("storage/:url")}}'
+                                asset = asset.replace(':url', product.image)
+                            let price = parseInt(product.price).toLocaleString('id-ID', {
+                                currency: 'IDR'
+                            });
+                            console.log(price);
+                            output += '<div class="col-lg-4 col-md-6">'+
+                                        '<a class="nav-link p-0 mb-4" href="">'+
+                                            '<div class="item">'+
+                                                '<div class="card">'+
+                                                    '<img src="'+asset+'" class="card-img-top" alt="'+product.name+'">'+
+                                                    '<div class="card-body">'+
+                                                    '<h5 class="card-title text-dark">'+product.name+'</h5>'+
+                                                    '<div class="mb-3">'+
+                                                        attr+
+                                                    '</div>'+
+                                                    '<p class="card-title text-dark">Rp '+price+' IDR</p>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</a>'+
+                                    '</div>';
+                        });
+                    } else {
+                        output += '<div class="fw-bold d-flex justify-content-center align-items-center">Product not found <i class="ms-2 fas fa-box-open"></i></div>';
+                    }
+
+                    $('#section_product').html(output);
+                }
+            });
+        }
+    $(document).ready(function(){
+        $('#search_product').on('keyup', function(){
+            
+        });
+    });
+    </script>
+@endsection

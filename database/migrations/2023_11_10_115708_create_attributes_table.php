@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('product_id')->default(0)->references('id')->on('products')->onDelete('cascade');
             $table->foreignId('color_id')->default(0)->references('id')->on('colors')->onDelete('cascade');
             $table->string('size')->nullable();
+            $table->tinyInteger('order')->default(1);
             $table->string('status')->default(80);
             $table->timestamps();
         });

@@ -33,6 +33,7 @@ class ProductController extends Controller
         $this->passingAttributeData = [
             'color_id' => 'required|numeric',
             'size' => 'required',
+            'order' => 'required|numeric',
             'status' => 'required|numeric',
         ];
 
@@ -105,7 +106,7 @@ class ProductController extends Controller
             $data = Product::get();
             return DataTables::of($data)
                 ->addIndexColumn()                
-                ->rawColumns(['name', 'price', 'image', 'category', 'weight', 'order', 'status', 'action'])
+                ->rawColumns(['name', 'price', 'image', 'category', 'weight', 'order', 'status', 'created_at', 'action'])
                 ->editColumn('image', function ($row) {
                     $image = '<img src="'.asset("storage/". $row->image).'" class="img-fluid" style="width:75px;height:75px;object-fit: contain;" alt="Product image">';
                     return $image;
@@ -118,6 +119,11 @@ class ProductController extends Controller
                 ->editColumn('status', function ($row) {
                     return [
                         get_list_status()[$row->status],
+                    ];
+                })
+                ->editColumn('created_at', function ($row) {
+                    return [
+                        date('d-m-Y H:i:s', strtotime($row->created_at)),
                     ];
                 })
                 ->addColumn('action', function ($row) {
@@ -201,7 +207,7 @@ class ProductController extends Controller
             $getColor = Color::pluck('name', 'id')->toArray();
             return DataTables::of($data)
                 ->addIndexColumn()                
-                ->rawColumns(['product_id', 'color_id', 'size', 'status', 'action'])
+                ->rawColumns(['product_id', 'color_id', 'size', 'order', 'status', 'action'])
                 ->editColumn('product_id', function ($row) use ($getProduct) {
                     return [
                         $getProduct[$row->product_id],
