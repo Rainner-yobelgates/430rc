@@ -5,6 +5,23 @@ body{
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
 } 
+.container-size{
+    padding: 4px 10px;
+}
+.disabled-color{
+    border-color: rgb(155, 155, 155);
+    color: #212529;
+    background-color: transparent;
+    pointer-events: none;
+    opacity: .65;
+}
+.disabled-size{
+    color: #000;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+    pointer-events: none;
+    opacity: .65;
+}
 /* Home Page */
 .navbar{
     .nav-link{

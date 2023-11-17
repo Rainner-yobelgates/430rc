@@ -16,6 +16,8 @@
 
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/website/css/style.css') }}">
+    {{-- Ajax --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title')</title>
   </head>

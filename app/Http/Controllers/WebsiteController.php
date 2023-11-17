@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Faq;
+use App\Models\Color;
 use App\Models\Gallery;
 use App\Models\Product;
 use App\Models\Setting;
+use App\Models\Attribute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Cache;
 
 class WebsiteController extends Controller
 {
@@ -83,9 +84,40 @@ class WebsiteController extends Controller
     }
     public function detail(Product $product){
         $setting = $this->setting;
+        $getColor = Color::pluck('name', 'id')->toArray();
 
-        return view('website.detail', compact('setting', 'product'));
+        $newProduct = Product::with(['attributes' => function($query){
+            $query->whereIn('id', function ($subquery) {
+                $subquery->select(DB::raw('MIN(id)'))
+                    ->from('attributes')
+                    ->where('status', 80)
+                    ->groupBy('size');
+            })->orderBy('order', 'ASC');
+        }])->orderBy('created_at', 'DESC')->limit(4)->get();
+        return view('website.detail', compact('setting', 'product', 'newProduct', 'getColor'));
     }
+    public function checkAvailable(Request $request){
+        if($request->ajax()){
+            if($request->type == 'size'){
+                $availableColor = Attribute::where('product_id', $request->productId)->where('size', $request->value)->where('status', 80)->groupBy('color_id')->pluck('color_id');
+                return response()->json([
+                    'type' => $request->type,
+                    'data' => $availableColor
+                ]);
+            }else{
+                $availableSize = Attribute::where('product_id', $request->productId)->where('color_id', $request->value)->where('status', 80)->groupBy('size')->pluck('size');
+                return response()->json([
+                    'type' => $request->type,
+                    'data' => $availableSize
+                ]);
+            }
+        }
+    }
+
+    public function addToCart(Request $request){
+        dd($request->all());
+    }
+    
     public function cart(){
         return view('website.cart');
     }

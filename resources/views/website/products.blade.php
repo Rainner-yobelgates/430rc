@@ -82,11 +82,11 @@
                                       <h5 class="card-title text-dark">{{$product->name}}</h5>
                                       <div class="mb-3">
                                         @forelse ($product->attributes as $attr)
-                                        <div class="btn btn-light mt-2">
+                                        <div class="btn btn-light mt-2 container-size">
                                             <p class="mb-0">{{$attr->size}}</p>
                                         </div>
                                         @empty
-                                        <div class="btn btn-light mt-2">
+                                        <div class="btn btn-light mt-2 container-size">
                                             <p class="mb-0">No size available</p>
                                         </div>
                                         @endforelse
@@ -168,10 +168,5 @@
                 }
             });
         }
-    $(document).ready(function(){
-        $('#search_product').on('keyup', function(){
-            
-        });
-    });
     </script>
 @endsection
