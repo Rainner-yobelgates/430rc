@@ -23,7 +23,7 @@
             <a class="nav-link active text-center" aria-current="page" href="{{route('products')}}">Product</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active text-center" aria-current="page" href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+            <a class="nav-link active text-center" aria-current="page" href="{{route('cart')}}"><i class="fa-solid fa-bag-shopping"></i></a>
           </li>
       </div>
     </div>

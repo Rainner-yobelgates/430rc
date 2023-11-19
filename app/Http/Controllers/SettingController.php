@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +15,8 @@ class SettingController extends Controller
         $active = 'setting';
 
         $settings = Setting::pluck('value', 'key')->toArray();
-        return view('admin.setting.index', compact('title', 'active', 'settings'));
+        $getCity = City::pluck('city', 'id')->toArray();
+        return view('admin.setting.index', compact('title', 'active', 'settings', 'getCity'));
     }
 
     public function update(Request $request){
@@ -26,6 +28,7 @@ class SettingController extends Controller
             'whatsapp' => 'numeric',
             'strava' => '',
             'location' => '',
+            'city' => '',
             'about-image' => 'image|mimes:jpeg,png,jpg|max:5120',
             'about-content' => '',
         ];

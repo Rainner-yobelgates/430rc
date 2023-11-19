@@ -87,6 +87,19 @@
                         @enderror
                     </div>
                 </div>
+                <div class="form-group row mb-2">
+                    <label class="col-sm-2 col-form-label">City</label>
+                    <div class="col-sm-10">
+                    <select name="city" id="city" class="form-control">
+                        @foreach ($getCity as $key => $city)
+                        <option value="{{ $key }}" {{isset($settings['city']) && $key == $settings['city'] ? 'selected' : ''}}>{{ $city }}</option>
+                        @endforeach
+                        @error('city')
+                            <span class="text-danger ms-1">{{ $message }}</span>
+                        @enderror
+                    </select>
+                    </div>
+                </div>
                 <hr class="my-4">
                 <h5>About Page</h5>
                 <div class="form-group row mb-2">

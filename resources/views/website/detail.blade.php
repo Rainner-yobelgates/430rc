@@ -22,10 +22,7 @@
             <p class="h5 mb-4">Rp {{number_format($product->price)}} IDR</p>
             <form action="{{route('addToCart')}}" method="post">
                 @csrf
-                <input type="hidden" name="name" value="{{$product->name}}">
-                <input type="hidden" name="slugs" value="{{$product->slugs}}">
-                <input type="hidden" name="price" value="{{$product->price}}">
-                <input type="hidden" name="image" value="{{$product->image}}">
+                <input type="hidden" name="product_id" value="{{$product->id}}">
                 <div class="select-color mb-4">
                     <p class="h6 fw-bold">Select Color</p>
                     {{-- foreach  --}}
@@ -94,7 +91,7 @@
                         
                     @endforelse
             <div class="col-12 text-center">
-                <a href="" class="btn btn-dark w-25 mt-3 rounded-pill">View All</a>
+                <a href="{{route('products')}}" class="btn btn-dark w-25 mt-3 rounded-pill">View All</a>
             </div>
         </div>
     </div>

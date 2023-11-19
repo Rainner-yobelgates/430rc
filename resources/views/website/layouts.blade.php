@@ -16,7 +16,7 @@
 
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/website/css/style.css') }}">
-    {{-- Ajax --}}
+  {{-- Ajax --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title')</title>
@@ -32,7 +32,28 @@
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     
     <script src="{{ asset('plugins/owlcarousel/dist/owl.carousel.min.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    @if (session()->has('success'))
+    <script>
+			swal({
+			title: "Success",
+			text: '{{session()->get('success')}}',
+			icon: "success",
+			button: "Oke",
+		});
+		</script>
+    @elseif(session()->has('error'))
+    <script>
+			swal({
+			title: "Error!",
+			text: '{{session()->get('error')}}',
+			icon: "error",
+			button: "Oke",
+		});
+		</script>
+	  @endif
     @yield('script')
+
   </body>
 </html>

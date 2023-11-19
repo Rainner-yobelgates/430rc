@@ -28,6 +28,9 @@ Route::get('/products/{product:slugs}/detail', [WebsiteController::class, 'detai
 Route::post('/check-available', [WebsiteController::class, 'checkAvailable'])->name('checkAvailable');
 Route::post('/add-to-cart', [WebsiteController::class, 'addToCart'])->name('addToCart');
 Route::get('/cart', [WebsiteController::class, 'cart'])->name('cart');
+Route::delete('/delete-cart/{id}', [WebsiteController::class, 'deleteCart'])->name('deleteCart');
+Route::post('/get-cities', [WebsiteController::class, 'getCities'])->name('getCities');
+Route::post('/get-courier', [WebsiteController::class, 'getCourier'])->name('getCourier');
 
 Route::get('/panel', [AuthController::class, 'login'])->name('login');
 Route::post('/panel/go-login', [AuthController::class, 'goLogin'])->name('goLogin');
