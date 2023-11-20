@@ -35,6 +35,12 @@ body{
 .hero{
     margin-top: 56px;
 }
+.img-hero{
+    max-height: 890px;
+}
+.img-motivation{
+    max-height: 472px;
+}
 .carousel-text-hero{
     left: 10%;
     bottom: 7rem;
@@ -47,6 +53,9 @@ body{
 .carousel-text-about{
     bottom: 7rem;
 }
+.text-about{
+    font-size: 19px;
+}
 /* gallery page */
 .gallery .img-fluid{
     border-radius: 5px;
@@ -58,9 +67,27 @@ body{
 
 /* Smartphone */
 /* @media (max-width: 575.98px)   */
-@media (max-width: 767.98px) { 
+@media (max-width: 767.98px) {
+    .card .card-title{
+        font-size: 15px;
+    } 
+    .img-hero{
+        max-height: 200px;
+    }
+    .img-motivation{
+        max-height: 150px;
+    }
+    .container-size{
+        padding: 1px 7px;
+    }
+    .container-size p{
+        font-size: 15px;
+    }
     .carousel-text-about{
         bottom: 1rem;
+    }
+    .text-about{
+        font-size: 15px;
     }
     .carousel-text-motivation{
         bottom: 1.15rem;
@@ -75,13 +102,17 @@ body{
     .carousel-text-hero{
         bottom: .15rem;
         .btn{
-            font-size: 8px;
+            font-size: 7px;
+        }
+        .btn-shop{
+            padding-top: 3px;
+            padding-bottom: 2px;
         }
         .text-hero{
             font-size: 8px !important
         };
         .text-title{
-            font-size: 10px !important
+            font-size: 9px !important
         };
     }
 }

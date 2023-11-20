@@ -30,7 +30,7 @@
                                         </form>
                                     </div>
                                 </div>
-                                <p class="mb-0 fw-bold mt-1">{{ucfirst($getColor[$product['color']])}} </p>
+                                <p class="mb-0 fw-bold mt-1">{{$product['category']}} - {{ucfirst($getColor[$product['color']])}} </p>
                                 <p class="mb-0 fw-bold mt-1">Size {{$product['size']}} </p>
                             </div>
                             <hr class="mt-3">
@@ -139,7 +139,7 @@
                 </div>
               </div>
               <div class="d-flex justify-content-center mt-3">
-                  <button class="btn btn-dark w-100" id="proccessBtn" disabled><a href="/test" class="text-decoration-none text-white">Process Order</a></button>
+                <a href="javascript:void(0)" class="text-decoration-none text-white w-100" id="whatsapp-link"><button class="btn btn-dark w-100" id="proccessBtn" disabled>Process Order</button></a>
               </div>
            </div>
         </div>
@@ -186,6 +186,8 @@
 @stop
 @section('script')
     <script>
+        let getColor = JSON.parse('{!!json_encode($getColor)!!}')
+
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -252,6 +254,36 @@
             totalPrice = totalPrice.replace(/\./g, ',');
             $('#totalPrice').html(totalPrice)
             $('#proccessBtn').attr('disabled', false)
+            updateWhatsAppLink(total, totalPrice)
+        }
+
+        function updateWhatsAppLink(subTotal, totalPrice) {
+            let cart = JSON.parse(`{!!json_encode($getCart)!!}`);
+            let listProduct = '';
+            let province = $('#province option:selected').text();
+            let city = $('#city option:selected').text();
+            let courier = $('#courier option:selected').text();
+            let fullAddress = $('#address').val();
+            let theCost = $('#courier').val();
+            let shippingCost = parseInt(theCost).toLocaleString('id-ID', {
+                currency: 'IDR',
+            });
+            subTotal = parseInt(subTotal).toLocaleString('id-ID', {
+                currency: 'IDR',
+            });
+            $(cart).each(function(index, item){
+                index = index + 1
+                let price = parseInt(item.price).toLocaleString('id-ID', {
+                    currency: 'IDR',
+                });
+                let cleanName = item.name.replace(/&#039;/g, '')
+                let linkRoute = '{{route("detail", ':id')}}'
+                linkRoute = linkRoute.replace(':id', item.slugs)
+                listProduct += '%20%0A'+index+'.%20Name%20%3A%20'+cleanName+'%0A%20%20%20%20Price%20%3A%20'+price+'%0A%20%20%20%20Category%20%3A%20'+item.category+'%0A%20%20%20%20Size%20%3A%20'+item.size+'%0A%20%20%20%20Color%20%3A%20'+getColor[item.color]+'%0A%20%20%20%20Link%20%3A%20'+linkRoute+''
+            })
+            let link = `https://wa.me/62{{$setting['whatsapp']}}?text=Hello,%20I%20would%20like%20to%20inquire%20about%20the%20availability%20of%20the%20following%20product(s):%0A%0A--- The%20Product ---%0A`+listProduct+`%0A%0A---%20My%20Address%20---%0A%0A-%20%20Province%20%3A%20`+province+`%0A-%20%20City%20%3A%20`+city+`%0A-%20%20Full%20Address%20%3A%20`+fullAddress+`%0A-%20%20Courier%20%3A%20`+courier+`%0A%0A---%20My%20Billing%20---%0A%0A-%20%20Shipping%20Cost%20%3A%20`+shippingCost+`%20(estimated)%0A-%20%20Subtotal%20%3A%20`+subTotal+`%0A-%20%20Total%20%3A%20`+totalPrice+`%0A%0AIf%20the%20mentioned%20product(s)%20is/are%20available,%20I%20am%20keen%20on%20proceeding%20with%20the%20order.%20Thank%20you.`;
+            $('#whatsapp-link').attr('href', link);
+            $('#whatsapp-link').attr('target', '_blank');
         }
     </script>
 @endsection

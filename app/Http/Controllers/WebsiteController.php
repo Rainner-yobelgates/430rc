@@ -31,7 +31,7 @@ class WebsiteController extends Controller
                     ->from('attributes')
                     ->where('status', 80)
                     ->groupBy('size');
-            });
+            })->orderBy('order', 'ASC');;
         }])->orderBy('created_at', 'DESC')->limit(8)->get();
         $setting = $this->setting;
         return view('website.home', compact('setting', 'getFaq', 'getProduct'));
@@ -130,6 +130,7 @@ class WebsiteController extends Controller
             'product_id' => $request->product_id,
             'name' => $product->name,
             'slugs' => $product->slugs,
+            'category' => $product->category,
             'price' => $product->price,
             'image' => $product->image,
             'color' => $request->color,
@@ -210,7 +211,7 @@ class WebsiteController extends Controller
 
         if (isset($response)) {
             foreach ($response as $data) {
-                $list .= '<option value="' . $data['cost'][0]['value'] . '">' . "JNE | " . " " . $data['description'] . " (" . $data['service'] . ")" . '</option>';
+                $list .= '<option value="' . $data['cost'][0]['value'] . '">' . "JNE | " . $data['description'] . " (" . $data['service'] . ")" . '</option>';
             };
         }
         return response()->json(['list' => $list]);

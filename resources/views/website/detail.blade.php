@@ -45,10 +45,10 @@
                     @endforeach
                     {{-- endforeach  --}}
                 </div>
-                <button type="submit" class="submit-bag btn btn-dark mb-3 w-100" disabled href="">Add To Bag</button>
+                <button type="submit" class="submit-bag btn btn-outline-dark mb-3 w-100" disabled >Add To Bag</button>
             </form>
                 <div class="mb-4">
-                    <button class="submit-buy btn btn-outline-dark w-100" disabled href="">Buy It Now</button>
+                    <a href="javascript:void(0)" class="text-decoration-none text-white" id="whatsapp-link"><button class="submit-buy btn btn-dark w-100" disabled for="whatsapp-link">Buy It Now</button></a>
                 </div>
             <div class="bg-light p-4">
                 {!! $product->description !!}
@@ -101,7 +101,7 @@
 <script>
     let colorList = JSON.parse('{!!json_encode($product->attributes->pluck('color_id')->unique())!!}')
     let sizeList = JSON.parse('{!!json_encode($product->attributes->pluck('size')->unique())!!}')
-    console.log(sizeList);
+    let getColor = JSON.parse('{!!json_encode($getColor)!!}')
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -139,6 +139,7 @@
                             }
                         })
                     }
+                    checkInputProcess()
                 };
             }
         });
@@ -149,24 +150,33 @@
         $('.btn-size').removeClass('btn-secondary');
         $(el).parent().addClass('btn-secondary');
         $(el).parent().removeClass('btn-light');
-        checkInputProcess()
         checkAvailable('size', $(el).val())
     }
     function colorInput(el){
+        console.log(colorList);
         $('.btn-color').addClass('btn-outline-dark');
         $('.btn-color').removeClass('btn-dark');
         $(el).parent().addClass('btn-dark');
         $(el).parent().removeClass('btn-outline-dark');
-        checkInputProcess()
         checkAvailable('color', $(el).val())
     }
     function checkInputProcess(){
         if($('input[name="size"]').is(':checked') && $('input[name="color"]').is(':checked')){
             $('.submit-bag').prop("disabled", false);
             $('.submit-buy').prop("disabled", false);
+            updateWhatsAppLink()
         }
     }
     
-       
+    function updateWhatsAppLink() {
+        let size = $('input[name="size"]').val();
+        let color = getColor[$('input[name="color"]').val()];
+        let productName = `{{$product->name}}`;
+        let cleanName = productName.replace(/&#039;/g, '')
+        let link = `https://wa.me/62{{$setting['whatsapp']}}?text=Hello,%20I%20want%20to%20ask%20about%20the%20availability%20of%20this%20product%20%3F%0A%0A---- The%20Product ----%20%0AName%20%3A%20`+cleanName+`%0APrice%20%3A%20{{number_format($product->price)}}%0ACategory%20%3A%20{{$product->category}}%0ASize%20%3A%20` + size + `%0AColor%20%3A%20` + color + `%0ALink%20%3A%20{{url()->current()}}%0A%0AIf%20this%20product%20is%20available,%20I%20am%20interested%20in%20continuing%20with%20the%20ordering%20process`;
+        
+        $('#whatsapp-link').attr('href', link);
+        $('#whatsapp-link').attr('target', '_blank');
+    }
 </script>
 @stop

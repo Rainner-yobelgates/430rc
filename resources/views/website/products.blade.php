@@ -73,7 +73,7 @@
             <div class="col-md-8 col-lg-9">
                 <div class="row" id="section_product">
                     @forelse ($getProduct as $product)
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-4 col-md-6 col-6">
                         <a class="nav-link p-0 mb-4" href="{{route('detail', $product->slugs)}}">
                             <div class="item">
                                 <div class="card">

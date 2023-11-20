@@ -6,16 +6,16 @@
                 <p class="text-white fw-bold">Follow Us</p>
                 <div class="col-8 d-flex justify-content-around">
                     @if (isset($setting['instagram']))
-                        <a class="text-white text-center h4" href="{{$setting['instagram']}}"><i class="fa-brands fa-instagram"></i></a>
+                        <a class="text-white text-center h4" target="_blank" href="{{$setting['instagram']}}"><i class="fa-brands fa-instagram"></i></a>
                     @endif
                     @if (isset($setting['tiktok']))
-                        <a class="text-white text-center h4" href="{{$setting['tiktok']}}"><i class="fa-brands fa-tiktok"></i></a>
+                        <a class="text-white text-center h4" target="_blank" href="{{$setting['tiktok']}}"><i class="fa-brands fa-tiktok"></i></a>
                     @endif
                     @if (isset($setting['whatsapp']))
-                        <a class="text-white text-center h4" href="https://wa.me/{{$setting['whatsapp']}}"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a class="text-white text-center h4" target="_blank" href="https://wa.me/62{{$setting['whatsapp']}}"><i class="fa-brands fa-whatsapp"></i></a>
                     @endif
                     @if (isset($setting['strava']))
-                        <a class="text-white text-center h4" href="{{$setting['strava']}}"><i class="fa-brands fa-strava"></i></a>
+                        <a class="text-white text-center h4" target="_blank" href="{{$setting['strava']}}"><i class="fa-brands fa-strava"></i></a>
                     @endif
                 </div>
             </div>

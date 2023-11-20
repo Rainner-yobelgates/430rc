@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div class="text-about mt-4" style="font-size: 19px">
+            <div class="text-about mt-4">
                 {!! $setting['about-content'] ?? '' !!}
             </div>
         </div>

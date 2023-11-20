@@ -41,6 +41,8 @@ class ColorController extends Controller
 
     public function store(Request $request){
         $data = $this->validate($request, $this->passingData);
+        $data['name'] = ucfirst($data['name']);
+
         $getColor = Color::create($data);
         return redirect(route('panel.color.show', $getColor->id))->with('success', 'Color created successfully');
     }
@@ -54,6 +56,7 @@ class ColorController extends Controller
 
     public function update(Color $color, Request $request){
         $data = $this->validate($request, $this->passingData);
+        $data['name'] = ucfirst($data['name']);
         $color->update($data);
         return redirect(route('panel.color.show', $color->id))->with('success', 'Color updated successfully');
     }

@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::create([
-        //     'name' => 'admin',
-        //     'email' => '430rc@gmail.com',
-        //     'password' => bcrypt('adminfor430rc'),
-        // ]);
+        User::create([
+            'name' => '430rc',
+            'email' => '430rc@gmail.com',
+            'password' => bcrypt('adminfor430rc'),
+        ]);
         foreach (json_decode(get_api_province())->rajaongkir->results as $province) {
             Province::create([
                 'province' => $province->province

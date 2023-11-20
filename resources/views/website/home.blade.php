@@ -6,7 +6,7 @@
 <section class="product mt-5">
     <div class="container">
         <div class="row">
-            <h1 class="fw-bold mb-3">Our Product</h1>
+            <h2 class="fw-bold mb-3">Our Product</h2>
             <div class="owl-carousel owl-theme mt-2">
                 @forelse ($getProduct as $product)
                 <div class="item">
@@ -15,8 +15,8 @@
                             <div class="card">
                                 <img src="{{asset('storage/' . $product->image)}}" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                  <h5 class="card-title text-dark">{{$product->name}}</h5>
-                                  <div class="mb-3">
+                                  <h5 class="card-title text-dark mb-0 mb-sm-2">{{$product->name}}</h5>
+                                  <div class="mb-sm-3 mb-2">
                                     @forelse ($product->attributes as $attr)
                                     <div class="btn btn-light mt-2 container-size">
                                         <p class="mb-0">{{$attr->size}}</p>
@@ -42,13 +42,13 @@
     </div>
 </section>
 <section class="motivation mt-4 pt-3 pb-4 bg-light">
-    <h1 class="text-center fw-bold py-2">Run Make It Better</h1>
+    <h2 class="text-center fw-bold py-2">Run Make It Better</h2>
     <div class="container mt-3">
         <div class="row">
             <div id="carouselMotivation" class="carousel carousel-dark slide">
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-bs-interval="10000">
-                    <img src="{{isset($setting['motivation']) ? asset('storage/'.$setting['motivation']) : asset('assets/website/image/motivation.png')}}" style="max-height: 472px;object-fit:cover;" class="d-block w-100" alt="...">
+                    <img src="{{isset($setting['motivation']) ? asset('storage/'.$setting['motivation']) : asset('assets/website/image/motivation.png')}}" style="object-fit:cover;" class="img-motivation d-block w-100" alt="...">
                     <div class="carousel-caption carousel-text-motivation">
                         <h1 class="text-white text-quote mb-5 fw-bold">‘’ PRESTIGE FIRST, PACE FOLLOWS ‘’</h1>
                         <h5 class="text-white text-quote-by mb-1 fw-bold">~ 430 Running Club ~</h5>
@@ -63,7 +63,7 @@
 <section class="faq mt-4">
     <div class="container">
         <div class="row">
-            <h1 class="fw-bold mb-3 text-center">FAQ</h1>
+            <h2 class="fw-bold mb-3 text-center">FAQ</h2>
             <div class="accordion" id="accordionExample">
                 @foreach ($getFaq as $key => $faq)
                     <div class="accordion-item">
@@ -118,7 +118,7 @@
             responsiveClass:true,
             responsive:{
                 100:{
-                    items:1,
+                    items:2,
                 },
                 600:{
                     items:2,
