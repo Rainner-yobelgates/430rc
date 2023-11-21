@@ -6,11 +6,15 @@
     <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <img src="{{asset('storage/' . $product->image)}}" class="mx-auto rounded mb-3" style="width: 100%;height:auto;objectfit:cover;" alt="">
+            <a href="{{asset('storage/'. $product->image)}}" data-lightbox="models" data-title="Image Of Product {{$product->name}}">
+                <img src="{{asset('storage/' . $product->image)}}" class="mx-auto rounded mb-3" style="width: 100%;height:auto;objectfit:cover;" alt="">
+            </a>
             <div class="row mt-4">
                 @forelse ($product->images as $image)
                 <div class="col-4">
-                    <img src="{{asset('storage/' . $image->image)}}" class="img-thumbnail ronded mx-auto" style="max-height: 200px;object-fit-cover;width:100%;" alt="Gallery Product">
+                    <a href="{{asset('storage/'. $image->image)}}" data-lightbox="models" data-title="Image Of Product {{$product->name}}">
+                        <img src="{{asset('storage/' . $image->image)}}" class="img-thumbnail ronded mx-auto" style="max-height: 200px;object-fit-cover;width:100%;" alt="Gallery Product">
+                    </a>
                 </div>
                 @empty
 
@@ -63,7 +67,7 @@
         <div class="row">
             <h1 class="fw-bold mb-4">Our Newest Product</h1>
             @forelse ($newProduct as $newItem)
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-3 col-6">
                         <a class="nav-link p-0 mb-4" href="{{route('detail', $newItem->slugs)}}">
                             <div class="item">
                                 <div class="card">
@@ -72,11 +76,11 @@
                                       <h5 class="card-title text-dark">{{$newItem->name}}</h5>
                                       <div class="mb-3">
                                         @forelse ($newItem->attributes as $attr)
-                                        <div class="btn btn-light mt-2">
+                                        <div class="btn btn-light mt-2 container-size">
                                             <p class="mb-0">{{$attr->size}}</p>
                                         </div>
                                         @empty
-                                        <div class="btn btn-light mt-2">
+                                        <div class="btn btn-light mt-2 container-size">
                                             <p class="mb-0">No size available</p>
                                         </div>
                                         @endforelse

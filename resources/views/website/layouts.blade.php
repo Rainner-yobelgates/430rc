@@ -9,6 +9,9 @@
 
     {{-- Fontawesome --}}
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome/css/all.min.css') }}">
+
+    {{-- Lightbox --}}
+    <link rel="stylesheet" href="{{ asset('plugins/lightbox2/dist/css/lightbox.css') }}">
     
     {{-- Owlcarousel --}}
     <link rel="stylesheet" href="{{ asset('plugins/owlcarousel/dist/assets/owl.carousel.min.css') }}">
@@ -32,6 +35,7 @@
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     
     <script src="{{ asset('plugins/owlcarousel/dist/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('plugins/lightbox2/dist/js/lightbox.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     @if (session()->has('success'))

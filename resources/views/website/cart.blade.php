@@ -30,8 +30,8 @@
                                         </form>
                                     </div>
                                 </div>
-                                <p class="mb-0 fw-bold mt-1">{{$product['category']}} - {{ucfirst($getColor[$product['color']])}} </p>
-                                <p class="mb-0 fw-bold mt-1">Size {{$product['size']}} </p>
+                                <p class="mb-0 mt-2">{{$product['category']}} - {{ucfirst($getColor[$product['color']])}} </p>
+                                <p class="mb-0">Size {{$product['size']}} </p>
                             </div>
                             <hr class="mt-3">
                         </div>
@@ -150,7 +150,7 @@
         <div class="row">
             <h1 class="fw-bold mb-4">Our Newest Product</h1>
             @forelse ($newProduct as $newItem)
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-6">
                     <a class="nav-link p-0 mb-4" href="{{route('detail', $newItem->slugs)}}">
                         <div class="item">
                             <div class="card">
@@ -159,11 +159,11 @@
                                     <h6 class="card-title text-dark">{{$newItem->name}}</h6>
                                     <div class="mb-3">
                                         @forelse ($newItem->attributes as $attr)
-                                        <div class="btn btn-light mt-2">
+                                        <div class="btn btn-light mt-2 container-size">
                                             <p class="mb-0">{{$attr->size}}</p>
                                         </div>
                                         @empty
-                                        <div class="btn btn-light mt-2">
+                                        <div class="btn btn-light mt-2 container-size">
                                             <p class="mb-0">No size available</p>
                                         </div>
                                         @endforelse

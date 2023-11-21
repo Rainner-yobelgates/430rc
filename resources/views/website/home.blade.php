@@ -8,9 +8,9 @@
         <div class="row">
             <h2 class="fw-bold mb-3">Our Product</h2>
             <div class="owl-carousel owl-theme mt-2">
-                @forelse ($getProduct as $product)
+                @forelse ($getProduct as $key => $product)
                 <div class="item">
-                    <a class="nav-link p-0" href="">
+                    <a class="nav-link p-0" href="{{route('detail', $product->slugs)}}">
                         <div class="item">
                             <div class="card">
                                 <img src="{{asset('storage/' . $product->image)}}" class="card-img-top" alt="...">
