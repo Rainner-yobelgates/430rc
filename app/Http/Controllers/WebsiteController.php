@@ -97,7 +97,11 @@ class WebsiteController extends Controller
                     ->groupBy('size');
             })->orderBy('order', 'ASC');
         }])->orderBy('created_at', 'DESC')->limit(4)->get();
-        return view('website.detail', compact('setting', 'product', 'newProduct', 'getColor'));
+        $limitedImages = $product->images()
+        ->where('status', 80)
+        ->limit(6)
+        ->get();
+        return view('website.detail', compact('setting', 'product', 'newProduct', 'getColor', 'limitedImages'));
     }
     public function checkAvailable(Request $request){
         if($request->ajax()){

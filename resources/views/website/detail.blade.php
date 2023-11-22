@@ -10,7 +10,7 @@
                 <img src="{{asset('storage/' . $product->image)}}" class="mx-auto rounded mb-3" style="width: 100%;height:auto;objectfit:cover;" alt="">
             </a>
             <div class="row mt-4">
-                @forelse ($product->images as $image)
+                @forelse ($limitedImages as $image)
                 <div class="col-4">
                     <a href="{{asset('storage/'. $image->image)}}" data-lightbox="models" data-title="Image Of Product {{$product->name}}">
                         <img src="{{asset('storage/' . $image->image)}}" class="img-thumbnail ronded mx-auto" style="max-height: 200px;object-fit-cover;width:100%;" alt="Gallery Product">

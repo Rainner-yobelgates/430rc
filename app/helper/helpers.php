@@ -1,4 +1,6 @@
 <?php 
+
+use Illuminate\Support\Facades\Session;
 function get_list_status_product()
 {
     return [
@@ -34,6 +36,11 @@ function list_size_product()
         '500 Ml',
         'All Size',
     ];
+}
+
+function notif_cart(){
+    $getNotifCart = Session::get('cart');
+    return $getNotifCart ?? [];
 }
 
 function get_api_province(){

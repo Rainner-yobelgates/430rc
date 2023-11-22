@@ -62,7 +62,7 @@
 }
 
 .navbar-toggler.collapsed .top-bar {
-  margin-top: -17px;
+  margin-top: -14px;
   -webkit-transform: rotate(0deg);
           transform: rotate(0deg);
 }
