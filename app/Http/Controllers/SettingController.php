@@ -31,6 +31,12 @@ class SettingController extends Controller
             'city' => '',
             'about-image' => 'image|mimes:jpeg,png,jpg|max:5120',
             'about-content' => '',
+            'running-video' => 'required|mimes:mp4,mov,avi,wmv|max:4096',
+            'workout-video' => 'required|mimes:mp4,mov,avi,wmv|max:4096',
+            'running-information' => '',
+            'running-disclaimer' => '',
+            'workout-information' => '',
+            'workout-disclaimer' => '',
         ];
         $data = $this->validate($request, $validate);
         if ($request->hasFile('header')) {
@@ -53,6 +59,20 @@ class SettingController extends Controller
                 Storage::delete($imageSetting->value);
             }
             $data['about-image'] = $request->file('about-image')->store('uploads/about-image');
+        }
+        if ($request->hasFile('running-video')) {
+            $imageSetting = Setting::where('key', 'running-video')->first();
+            if (isset($imageSetting->value)) {
+                Storage::delete($imageSetting->value);
+            }
+            $data['running-video'] = $request->file('running-video')->store('uploads/program');
+        }
+        if ($request->hasFile('workout-video')) {
+            $imageSetting = Setting::where('key', 'workout-video')->first();
+            if (isset($imageSetting->value)) {
+                Storage::delete($imageSetting->value);
+            }
+            $data['workout-video'] = $request->file('workout-video')->store('uploads/program');
         }
         foreach ($data as $key => $val) {
             $getData = Setting::firstOrCreate([
