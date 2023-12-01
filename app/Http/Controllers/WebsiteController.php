@@ -46,7 +46,6 @@ class WebsiteController extends Controller
         $setting = $this->setting;
         return view('website.gallery', compact('setting', 'getGallery'));
     }
-
     public function products(Request $request){
         $setting = $this->setting;
         $getProduct = Product::with(['attributes' => function($query){
@@ -121,7 +120,14 @@ class WebsiteController extends Controller
             }
         }
     }
+    public function running(){
+        $setting = $this->setting;
 
+        return view('website.running', compact('setting'));
+    }
+    public function workout(){
+
+    }
     public function addToCart(Request $request){
         $product = Product::find($request->product_id);
 

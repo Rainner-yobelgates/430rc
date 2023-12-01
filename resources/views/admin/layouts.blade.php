@@ -60,6 +60,15 @@
                             <i class="fa-solid fa-question-circle" style="font-size: 18px;"></i> <span class="align-middle">Faq</span>
                         </a>
 					</li>
+					<li class="sidebar-item">
+						<a data-bs-target="#dashboards" data-bs-toggle="collapse" class="sidebar-link" aria-expanded="true">
+							<i class="fas fa-book-open" style="font-size: 18px;"></i><span class="align-middle">Program</span>
+						</a>
+						<ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show" data-bs-parent="#sidebar" style="">
+							<li class="sidebar-item"><a class="sidebar-link" href="/">Running</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="/">Workout</a></li>
+						</ul>
+					</li>
 					<li class="sidebar-item {{ $active == "setting" ? "active" : "" }}">
 						<a class="sidebar-link d-flex align-items-center" href="{{route('panel.setting.index')}}">
                             <i class="fa-solid fa-gear align-middle" style="font-size: 18px;"></i> <span class="align-middle">Setting</span>

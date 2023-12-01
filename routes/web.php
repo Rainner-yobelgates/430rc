@@ -24,6 +24,8 @@ Route::get('/', [WebsiteController::class, 'home'])->name('home');
 Route::get('/about', [WebsiteController::class, 'about'])->name('about');
 Route::get('/gallery', [WebsiteController::class, 'gallery'])->name('gallery');
 Route::get('/products', [WebsiteController::class, 'products'])->name('products');
+Route::get('/running-program', [WebsiteController::class, 'running'])->name('running');
+Route::get('/workout-program', [WebsiteController::class, 'workout'])->name('workout');
 Route::get('/products/{product:slugs}/detail', [WebsiteController::class, 'detail'])->name('detail');
 Route::post('/check-available', [WebsiteController::class, 'checkAvailable'])->name('checkAvailable');
 Route::post('/add-to-cart', [WebsiteController::class, 'addToCart'])->name('addToCart');
