@@ -31,6 +31,7 @@ Route::get('/cart', [WebsiteController::class, 'cart'])->name('cart');
 Route::delete('/delete-cart/{id}', [WebsiteController::class, 'deleteCart'])->name('deleteCart');
 Route::post('/get-cities', [WebsiteController::class, 'getCities'])->name('getCities');
 Route::post('/get-courier', [WebsiteController::class, 'getCourier'])->name('getCourier');
+Route::post('/send-email', [WebsiteController::class, 'sendEmail'])->name('sendEmail');
 
 Route::get('/panel', [AuthController::class, 'login'])->name('login');
 Route::post('/panel/go-login', [AuthController::class, 'goLogin'])->name('goLogin');

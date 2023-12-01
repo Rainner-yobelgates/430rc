@@ -23,4 +23,21 @@
         </div>
     </div>
 </section>
+<section class="emailus mt-5">
+    <h2 class="text-center fw-bold mb-3">"Be a Part of Us!"</h2>
+    <div class="container">
+        <div class="row">
+            <div class="card p-4">
+                <h6 class="text-center">Be a part of us by entering your email.</h6>
+                <form action="{{route('sendEmail')}}" method="post">
+                    @csrf
+                    <div class="input-group">
+                        <input id="input_email" type="email" name="email" class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}" placeholder="Email" aria-label="email" aria-describedby="addon-wrapping">
+                        <button class="btn btn-dark">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 @stop

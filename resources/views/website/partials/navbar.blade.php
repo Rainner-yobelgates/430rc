@@ -13,9 +13,18 @@
           <li class="nav-item">
             <a class="nav-link active text-center" aria-current="page" href="{{route('home')}}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active text-center" aria-current="page" href="{{route('about')}}">About</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              About
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{route('about')}}">Our Story</a></li>
+              <li><a class="dropdown-item" href="#">Our Program</a></li>
+            </ul>
           </li>
+          {{-- <li class="nav-item">
+            <a class="nav-link active text-center" aria-current="page" href="{{route('about')}}">About</a>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link active text-center" aria-current="page" href="{{route('gallery')}}">Gallery</a>
           </li>

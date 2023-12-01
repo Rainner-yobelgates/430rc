@@ -13,6 +13,7 @@ use App\Models\Attribute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\CustomerEmail;
 use Illuminate\Support\Facades\Session;
 
 class WebsiteController extends Controller
@@ -219,5 +220,13 @@ class WebsiteController extends Controller
             };
         }
         return response()->json(['list' => $list]);
+    }
+
+    public function sendEmail(Request $request){
+        $data = $this->validate($request, [
+            'email' => 'required|email'
+        ]);
+        CustomerEmail::create($data);
+        return redirect('about')->with('success', 'Email sent successfully');
     }
 }
