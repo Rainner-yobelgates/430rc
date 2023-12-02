@@ -9,6 +9,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RunningController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -95,5 +97,8 @@ Route::group(['middleware' => 'auth'], function () {
     //Settings
     Route::get('/panel/setting', [SettingController::class, 'index'])->name('panel.setting.index');
     Route::patch('/panel/setting/update', [SettingController::class, 'update'])->name('panel.setting.update');
+    //Programs
+    Route::get('/panel/program/running', [RunningController::class, 'index'])->name('panel.running.index');
+    Route::patch('/panel/program/running/update', [RunningController::class, 'update'])->name('panel.running.update');
 });
 

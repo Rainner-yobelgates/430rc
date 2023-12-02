@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\CustomerEmail;
+use App\Models\RunningProgram;
 use Illuminate\Support\Facades\Session;
 
 class WebsiteController extends Controller
@@ -122,11 +123,17 @@ class WebsiteController extends Controller
     }
     public function running(){
         $setting = $this->setting;
+        $getRunning = RunningProgram::get();
+        foreach ($getRunning as $key => $running) {
+            $getRunning[$key]['description'] = json_decode($running->description);
+        }
 
-        return view('website.running', compact('setting'));
+        return view('website.running', compact('setting', 'getRunning'));
     }
     public function workout(){
+        $setting = $this->setting;
 
+        return view('website.workout', compact('setting'));
     }
     public function addToCart(Request $request){
         $product = Product::find($request->product_id);

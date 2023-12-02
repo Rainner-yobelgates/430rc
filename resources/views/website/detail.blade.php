@@ -54,7 +54,7 @@
                 <div class="mb-4">
                     <a href="javascript:void(0)" class="text-decoration-none text-white" id="whatsapp-link"><button class="submit-buy btn btn-dark w-100" disabled for="whatsapp-link">Buy It Now</button></a>
                 </div>
-            <div class="bg-light p-4">
+            <div class="bg-light p-4 shadow-sm">
                 {!! $product->description !!}
             </div>
           </div>

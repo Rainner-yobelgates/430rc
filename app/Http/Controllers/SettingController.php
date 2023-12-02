@@ -31,7 +31,7 @@ class SettingController extends Controller
             'city' => '',
             'about-image' => 'image|mimes:jpeg,png,jpg|max:5120',
             'about-content' => '',
-            'running-video' => 'mimes:mp4,mov,avi,wmv|',
+            'running-video' => 'mimes:mp4,mov,avi,wmv|max:5120',
             'workout-video' => 'mimes:mp4,mov,avi,wmv|max:5120',
             'running-information' => '',
             'running-disclaimer' => '',

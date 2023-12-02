@@ -17,11 +17,12 @@
     <div class="container">
         <div class="row">
             <h4 class="fw-bold">Training Plan For Running</h4>
+            @if (isset($getRunning))
             @for ($i = 1; $i <= 4; $i++)
             <h5 class="fst-italic mt-3">Week {{$i}}</h5>
             <div class="table-responsive">
                 <table class="table table-bordered">
-                    <thead class="table-info">
+                    <thead class="table-dark">
                       <tr class="text-center">
                         <th scope="col">Monday</th>
                         <th scope="col">Tuesday</th>
@@ -34,60 +35,24 @@
                     </thead>
                     <tbody class="table-light">
                       <tr>
-                        <td scope="row" class="text-center">
-                            <p class="fw-bold">Warming up</p>
-                            <hr>
-                            <p>test tes</p>
-                            <hr>
-                            <p class="fw-bold">Cooling down</p>
-                        </td>
-                        <td scope="row" class="text-center">
-                            <p class="fw-bold">Warming up</p>
-                            <hr>
-                            <p>test tes</p>
-                            <hr>
-                            <p class="fw-bold">Cooling down</p>
-                        </td>
-                        <td scope="row" class="text-center">
-                            <p class="fw-bold">Warming up</p>
-                            <hr>
-                            <p>test tes</p>
-                            <hr>
-                            <p class="fw-bold">Cooling down</p>
-                        </td>
-                        <td scope="row" class="text-center">
-                            <p class="fw-bold">Warming up</p>
-                            <hr>
-                            <p>test tes</p>
-                            <hr>
-                            <p class="fw-bold">Cooling down</p>
-                        </td>
-                        <td scope="row" class="text-center">
-                            <p class="fw-bold">Warming up</p>
-                            <hr>
-                            <p>test tes</p>
-                            <hr>
-                            <p class="fw-bold">Cooling down</p>
-                        </td>
-                        <td scope="row" class="text-center">
-                            <p class="fw-bold">Warming up</p>
-                            <hr>
-                            <p>test tes</p>
-                            <hr>
-                            <p class="fw-bold">Cooling down</p>
-                        </td>
-                        <td scope="row" class="text-center">
-                            <p class="fw-bold">Warming up</p>
-                            <hr>
-                            <p>test tes</p>
-                            <hr>
-                            <p class="fw-bold">Cooling down</p>
-                        </td>
+                        @if (isset($getRunning[$i-1]))
+                          @foreach ($getRunning[$i-1]->description as $desc)
+                          <td scope="row" class="text-center">
+                              <p class="fw-bold mb-0">Warming up</p>
+                              <p class="fw-bold">Dynamic Screching</p>
+                              <hr>
+                              {!!$desc!!}
+                              <hr>
+                              <p class="fw-bold">Cooling down</p>
+                          </td>
+                          @endforeach                            
+                        @endif
                       </tr>
                     </tbody>
                   </table>
             </div>
             @endfor
+            @endif
         </div>
     </div>
 </section>

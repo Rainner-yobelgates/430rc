@@ -38,6 +38,19 @@ function list_size_product()
     ];
 }
 
+function list_days($index = Null)
+{
+    return [
+        'monday' . $index,
+        'tuesday' . $index,
+        'wednesday' . $index,
+        'thursday' . $index,
+        'friday' . $index,
+        'saturday' . $index,
+        'sunday' . $index,
+    ];
+}
+
 function notif_cart(){
     $getNotifCart = Session::get('cart');
     return $getNotifCart ?? [];
