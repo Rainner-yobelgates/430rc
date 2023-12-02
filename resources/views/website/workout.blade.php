@@ -17,6 +17,7 @@
     <div class="container">
         <div class="row">
             <h4 class="fw-bold">Training Plan For Workout</h4>
+            @if (isset($getWorkout))
             @for ($i = 1; $i <= 4; $i++)
             <h5 class="fst-italic mt-3">Week {{$i}}</h5>
             <div class="table-responsive">
@@ -34,88 +35,24 @@
                     </thead>
                     <tbody class="table-light">
                       <tr>
-                        <td scope="row" class="text-center">
-                            <p class="fw-bold mb-0">Warming up</p>
-                            <p class="fw-bold">Dynamic Screching</p>
-                            <hr>
-                            <p>Easy Run</p>
-                            <p>40min</p>
-                            <p>pace 6:00</p>
-                            <p>intensitas 80%</p>
-                            <hr>
-                            <p class="fw-bold">Cooling down</p>
-                        </td>
-                        <td scope="row" class="text-center">
-                            <p class="fw-bold mb-0">Warming up</p>
-                            <p class="fw-bold">Dynamic Screching</p>
-                            <hr>
-                            <p>Easy Run</p>
-                            <p>40min</p>
-                            <p>pace 6:00</p>
-                            <p>intensitas 80%</p>
-                            <hr>
-                            <p class="fw-bold">Cooling down</p>
-                        </td>
-                        <td scope="row" class="text-center">
-                            <p class="fw-bold mb-0">Warming up</p>
-                            <p class="fw-bold">Dynamic Screching</p>
-                            <hr>
-                            <p>Easy Run</p>
-                            <p>40min</p>
-                            <p>pace 6:00</p>
-                            <p>intensitas 80%</p>
-                            <hr>
-                            <p class="fw-bold">Cooling down</p>
-                        </td>
-                        <td scope="row" class="text-center">
-                            <p class="fw-bold mb-0">Warming up</p>
-                            <p class="fw-bold">Dynamic Screching</p>
-                            <hr>
-                            <p>Easy Run</p>
-                            <p>40min</p>
-                            <p>pace 6:00</p>
-                            <p>intensitas 80%</p>
-                            <hr>
-                            <p class="fw-bold">Cooling down</p>
-                        </td>
-                        <td scope="row" class="text-center">
-                            <p class="fw-bold mb-0">Warming up</p>
-                            <p class="fw-bold">Dynamic Screching</p>
-                            <hr>
-                            <p>Easy Run</p>
-                            <p>40min</p>
-                            <p>pace 6:00</p>
-                            <p>intensitas 80%</p>
-                            <hr>
-                            <p class="fw-bold">Cooling down</p>
-                        </td>
-                        <td scope="row" class="text-center">
-                            <p class="fw-bold mb-0">Warming up</p>
-                            <p class="fw-bold">Dynamic Screching</p>
-                            <hr>
-                            <p>Easy Run</p>
-                            <p>40min</p>
-                            <p>pace 6:00</p>
-                            <p>intensitas 80%</p>
-                            <hr>
-                            <p class="fw-bold">Cooling down</p>
-                        </td>
-                        <td scope="row" class="text-center">
-                            <p class="fw-bold mb-0">Warming up</p>
-                            <p class="fw-bold">Dynamic Screching</p>
-                            <hr>
-                            <p>Easy Run</p>
-                            <p>40min</p>
-                            <p>pace 6:00</p>
-                            <p>intensitas 80%</p>
-                            <hr>
-                            <p class="fw-bold">Cooling down</p>
-                        </td>
+                        @if (isset($getWorkout[$i-1]))
+                          @foreach ($getWorkout[$i-1]->description as $desc)
+                          <td scope="row" class="text-center">
+                              <p class="fw-bold mb-0">Warming up</p>
+                              <p class="fw-bold">Dynamic Screching</p>
+                              <hr>
+                              {!!$desc!!}
+                              <hr>
+                              <p class="fw-bold">Cooling down</p>
+                          </td>
+                          @endforeach                            
+                        @endif
                       </tr>
                     </tbody>
                   </table>
             </div>
             @endfor
+            @endif
         </div>
     </div>
 </section>

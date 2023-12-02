@@ -11,10 +11,11 @@ use App\Models\Setting;
 use App\Models\Province;
 use App\Models\Attribute;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 use App\Models\CustomerEmail;
 use App\Models\RunningProgram;
+use App\Models\WorkoutProgram;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class WebsiteController extends Controller
@@ -132,8 +133,11 @@ class WebsiteController extends Controller
     }
     public function workout(){
         $setting = $this->setting;
-
-        return view('website.workout', compact('setting'));
+        $getWorkout = WorkoutProgram::get();
+        foreach ($getWorkout as $key => $workout) {
+            $getWorkout[$key]['description'] = json_decode($workout->description);
+        }
+        return view('website.workout', compact('setting', 'getWorkout'));
     }
     public function addToCart(Request $request){
         $product = Product::find($request->product_id);

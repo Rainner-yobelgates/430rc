@@ -9,7 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\RunningController;
+use App\Http\Controllers\ProgramController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,7 +98,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/panel/setting', [SettingController::class, 'index'])->name('panel.setting.index');
     Route::patch('/panel/setting/update', [SettingController::class, 'update'])->name('panel.setting.update');
     //Programs
-    Route::get('/panel/program/running', [RunningController::class, 'index'])->name('panel.running.index');
-    Route::patch('/panel/program/running/update', [RunningController::class, 'update'])->name('panel.running.update');
+    Route::get('/panel/program/running', [ProgramController::class, 'index'])->name('panel.running.index');
+    Route::patch('/panel/program/running/update', [ProgramController::class, 'update'])->name('panel.running.update');
+    Route::get('/panel/program/workout', [ProgramController::class, 'indexWo'])->name('panel.workout.index');
+    Route::patch('/panel/program/workout/update', [ProgramController::class, 'updateWo'])->name('panel.workout.update');
 });
 
