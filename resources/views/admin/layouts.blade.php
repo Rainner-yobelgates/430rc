@@ -61,6 +61,11 @@
                             <i class="fa-solid fa-question-circle" style="font-size: 18px;"></i> <span class="align-middle">Faq</span>
                         </a>
 					</li>
+					<li class="sidebar-item {{ $active == "customer-email" ? "active" : "" }}">
+						<a class="sidebar-link d-flex align-items-center" href="{{route('panel.customerEmail.index')}}">
+                            <i class="fa-solid fa-users" style="font-size: 18px;"></i> <span class="align-middle">Customer Email</span>
+                        </a>
+					</li>
 					<li class="sidebar-item">
 						<a data-bs-target="#programs" data-bs-toggle="collapse" class="sidebar-link" aria-expanded="true">
 							<i class="fas fa-book-open" style="font-size: 18px;"></i><span class="align-middle">Program</span>

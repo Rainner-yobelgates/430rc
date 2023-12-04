@@ -1,14 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;600&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@200;400;600&display=swap');
 @import "hamburger.css";
 body{
-    font-family: 'Heebo', sans-serif;
+    font-family: 'Onest', sans-serif;
     font-weight: 400;
     background-color: #f7f6f3;
 } 
 .card{
     border: none;
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+.card img {
+    height: 350px;
+    object-fit: cover;
 }
 .container-size{
     padding: 4px 10px;
@@ -78,6 +83,10 @@ body{
     .card .card-title{
         font-size: 15px;
     } 
+    .card img {
+        height: 250px;
+        object-fit: cover;
+    }
     .img-hero{
         max-height: 200px;
     }
@@ -99,7 +108,7 @@ body{
     .carousel-text-motivation{
         bottom: 1.15rem;
         .text-quote{
-            font-size: 16px;
+            font-size: 15px;
             margin-bottom: 18px !important;
         }
         .text-quote-by{

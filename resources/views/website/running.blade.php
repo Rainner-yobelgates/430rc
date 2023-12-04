@@ -65,7 +65,7 @@
         {!!$setting['running-information']!!}
       </div>
     </div>
-    <div class="col-12 col-md-5">
+    <div class="col-12 col-md-5 mt-4 mt-sm-0">
       <div class="card p-4 shadow-sm" style="border-radius: 25px">
         <h3 class="text-center">Disclaimer</h3>
         {!!$setting['running-disclaimer']!!}

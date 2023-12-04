@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-white fixed-top">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #f7f6f3">
     <div class="container">
       <img src="{{asset('assets/website/image/logo.png')}}" style="width: 55px" alt="image logo">
       <div class="d-flex">

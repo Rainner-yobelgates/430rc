@@ -1,15 +1,17 @@
 <?php
 
+use App\Models\CustomerEmail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\CustomerEmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,5 +104,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('/panel/program/running/update', [ProgramController::class, 'update'])->name('panel.running.update');
     Route::get('/panel/program/workout', [ProgramController::class, 'indexWo'])->name('panel.workout.index');
     Route::patch('/panel/program/workout/update', [ProgramController::class, 'updateWo'])->name('panel.workout.update');
+    // Customer Email
+    Route::get('/panel/customer-email', [CustomerEmailController::class, 'index'])->name('panel.customerEmail.index');
+    Route::get('/panel/customer-email/data', [CustomerEmailController::class, 'data'])->name('panel.customerEmail.data');
 });
 
