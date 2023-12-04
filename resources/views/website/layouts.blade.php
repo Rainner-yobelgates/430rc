@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{{asset('assets/website/image/logo.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('assets/website/image/icon.png')}}" type="image/x-icon">
 
     {{-- Bootstrap --> --}}
     <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">

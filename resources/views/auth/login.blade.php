@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman Login</title>
+    <link rel="icon" href="{{asset('assets/website/image/icon.png')}}" type="image/x-icon">
     <!-- Menggunakan Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}">
     <style>
