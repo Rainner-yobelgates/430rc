@@ -51,7 +51,7 @@
                     <img src="{{isset($setting['motivation']) ? asset('storage/'.$setting['motivation']) : asset('assets/website/image/motivation.png')}}" style="object-fit:cover;" class="img-motivation d-block w-100" alt="...">
                     <div class="carousel-caption carousel-text-motivation">
                         <h1 class="text-white text-quote mb-5 fw-bold">‘’ PRESTIGE FIRST, PACE FOLLOWS ‘’</h1>
-                        <h5 class="text-white text-quote-by mb-1 fw-bold">~ 430 Running Club ~</h5>
+                        <h5 class="text-white text-quote-by mb-1 fw-bold">- 430 RC -</h5>
                     </div>
                     </div>
                 </div>

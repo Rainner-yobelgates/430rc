@@ -61,13 +61,13 @@
   <div class="row">
     <div class="col-12 col-md-7">
       <div class="card p-4 shadow-sm" style="border-radius: 25px">
-        <h3 class="text-center">For Your Information</h3>
+        <h3 class="text-center fw-bold">For Your Information</h3>
         {!!$setting['workout-information']!!}
       </div>
     </div>
     <div class="col-12 col-md-5">
       <div class="card p-4 shadow-sm" style="border-radius: 25px">
-        <h3 class="text-center">Disclaimer</h3>
+        <h3 class="text-center fw-bold">Disclaimer</h3>
         {!!$setting['workout-disclaimer']!!}
       </div>
     </div>

@@ -37,6 +37,9 @@ class SettingController extends Controller
             'running-disclaimer' => '',
             'workout-information' => '',
             'workout-disclaimer' => '',
+            'title-header' => '',
+            'sub-title-header' => '',
+            'text-header' => '',
         ];
         $data = $this->validate($request, $validate);
         if ($request->hasFile('header')) {

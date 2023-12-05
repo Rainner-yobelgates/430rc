@@ -24,6 +24,36 @@
                     </div>
                 </div>
                 <div class="form-group row mb-2">
+                    <label class="col-sm-2 col-form-label">Title Header</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="title-header" value="{{ old('title-header', $settings['title-header'] ?? '') }}"  class="form-control"
+                        placeholder="Input Title Header Field">
+                        @error('title-header')
+                            <span class="text-danger ms-1">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row mb-2">
+                    <label class="col-sm-2 col-form-label">Sub Title Header</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="sub-title-header" value="{{ old('sub-title-header', $settings['sub-title-header'] ?? '') }}"  class="form-control"
+                        placeholder="Input Sub Title Header Field">
+                        @error('sub-title-header')
+                            <span class="text-danger ms-1">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row mb-2">
+                    <label class="col-sm-2 col-form-label">Text Header</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="text-header" value="{{ old('text-header', $settings['text-header'] ?? '') }}"  class="form-control"
+                        placeholder="Input Text Header Field">
+                        @error('text-header')
+                            <span class="text-danger ms-1">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row mb-2">
                     <label class="col-sm-2 col-form-label">Banner Motivation</label>
                     <div class="col-sm-10">
                         @isset($settings['motivation'])
