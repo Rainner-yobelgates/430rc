@@ -212,15 +212,14 @@
                 success: function(res) {
                     $('#city').html(res.result);
                     $('#city').removeAttr('disabled');
+                    getCourier()
                 },
             })
-            getCourier()
         }
         
         function getCourier(){
-            let city_id = $('#city').val()
+            let city_id = $('#city option:selected').val()
             let weight = '{{$totalWeight}}'
-
             $.ajax({
                 url: '{{route('getCourier')}}',
                 method: 'POST',

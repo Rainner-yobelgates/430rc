@@ -218,8 +218,12 @@ class WebsiteController extends Controller
     public function getCities(Request $request){
         $getCity = City::where('province_id', $request->province_id)->get();
         $result = '';
-        foreach ($getCity as $city) {
-            $result .= '<option value="' . $city->id . '">' . $city->type . ' ' . $city->city . '</option>';
+        foreach ($getCity as $index => $city) {
+            $selected = '';
+            if($index == 0){
+                $selected = 'selected';
+            }
+            $result .= '<option ' . $selected . ' value="' . $city->id . '">' . $city->type . ' ' . $city->city . '</option>';
         }
         return response()->json(['result' => $result]);
     }

@@ -6,14 +6,14 @@
 <section class="product mt-5">
     <div class="container">
         <div class="row">
-            <h2 class="fw-bold mb-3">Our Product</h2>
+            <h2 class="fw-bold mb-3">Our Products</h2>
             <div class="owl-carousel owl-theme mt-2">
                 @forelse ($getProduct as $key => $product)
                 <div class="item">
                     <a class="nav-link p-0" href="{{route('detail', $product->slugs)}}">
                         <div class="item">
                             <div class="card">
-                                <img src="{{asset('storage/' . $product->image)}}" class="card-img-top" alt="...">
+                                <img src="{{asset('storage/' . $product->image)}}" class="card-img-top" alt="{{$product->name}}" loading="lazy">
                                 <div class="card-body">
                                   <h5 class="card-title text-dark mb-0 mb-sm-2">{{$product->name}}</h5>
                                   <div class="mb-sm-3 mb-2">

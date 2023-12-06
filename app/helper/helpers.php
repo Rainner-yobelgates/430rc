@@ -113,6 +113,7 @@ function get_api_city(){
 }
 
 function get_courier($origin, $destination, $weight, $courier){
+    // dd($origin, $destination, $weight, $courier);
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
@@ -123,7 +124,7 @@ function get_courier($origin, $destination, $weight, $courier){
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "origin=". $origin ."&destination=". $destination ."&weight=".$weight."&courier=".$courier,
+    CURLOPT_POSTFIELDS => "origin=". $origin ."&destination=". $destination ."&weight=".(int)$weight."&courier=".$courier,
     CURLOPT_HTTPHEADER => array(
         "content-type: application/x-www-form-urlencoded",
         "key: " . env('KEY_RAJAONGKIR')

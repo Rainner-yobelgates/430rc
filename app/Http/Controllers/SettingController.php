@@ -21,15 +21,15 @@ class SettingController extends Controller
 
     public function update(Request $request){
         $validate = [
-            'header' => 'image|mimes:jpeg,png,jpg|max:5120',
-            'motivation' => 'image|mimes:jpeg,png,jpg|max:5120',
+            'header' => 'image|mimes:jpeg,png,jpg,webp|max:5120',
+            'motivation' => 'image|mimes:jpeg,png,jpg,webp|max:5120',
             'instagram' => '',
             'tiktok' => '',
             'whatsapp' => 'numeric',
             'strava' => '',
             'location' => '',
             'city' => '',
-            'about-image' => 'image|mimes:jpeg,png,jpg|max:5120',
+            'about-image' => 'image|mimes:jpeg,png,jpg,webp|max:5120',
             'about-content' => '',
             'running-video' => 'mimes:mp4,mov,avi,wmv|max:10240',
             'workout-video' => 'mimes:mp4,mov,avi,wmv|max:10240',
