@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #f7f6f3">
     <div class="container">
       <a href="{{route('home')}}">
-        <img src="{{asset('assets/website/image/logo.png')}}" style="width: 55px" alt="image logo">
+        <img src="{{asset('assets/website/image/logo.png')}}" style="width: 51px" alt="image logo">
       </a>
       <div class="d-flex">
         <a class="text-dark me-4 d-block d-lg-none" aria-current="page" href="{{route('products')}}"><i style="font-size: 19px" class="fa-solid fa-search"></i></a>

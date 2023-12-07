@@ -39,7 +39,6 @@
     <script src="{{ asset('plugins/owlcarousel/dist/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('plugins/lightbox2/dist/js/lightbox.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
     @if (session()->has('success'))
     <script>
 			swal({
