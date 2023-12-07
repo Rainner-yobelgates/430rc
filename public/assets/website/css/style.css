@@ -84,7 +84,7 @@ body{
         font-size: 15px;
     } 
     .card img {
-        height: 250px;
+        height: 210px;
         object-fit: cover;
     }
     .img-hero{

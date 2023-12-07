@@ -73,8 +73,8 @@
                                 <div class="card">
                                     <img src="{{asset('storage/' . $newItem->image)}}" class="card-img-top" alt="{{$newItem->name}}">
                                     <div class="card-body">
-                                      <h5 class="card-title text-dark">{{$newItem->name}}</h5>
-                                      <div class="mb-3">
+                                      <h5 class="card-title text-dark mb-0 mb-sm-2">{{$newItem->name}}</h5>
+                                      <div class="mb-sm-3 mb-2">
                                         @forelse ($newItem->attributes as $attr)
                                         <div class="btn btn-light mt-2 container-size">
                                             <p class="mb-0">{{$attr->size}}</p>

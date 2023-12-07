@@ -6,10 +6,12 @@
     <div class="container mt-4">
         <div class="row">
             <h1 class="text-center fw-bold mb-3">Our Program</h1>
+            @if (isset($setting['workout-video']))
             <video autoplay loop muted style="width: 80%;height: 10%;" class="mx-auto">
-                <source src="{{ asset('storage/'. $setting['workout-video']) }}" type="video/mp4">
+                <source src="{{ asset('storage/'. $setting['running-video']) }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
+            @endif
         </div>
     </div>
 </section>
@@ -62,13 +64,13 @@
     <div class="col-12 col-md-7">
       <div class="card p-4 shadow-sm" style="border-radius: 25px">
         <h3 class="text-center fw-bold">For Your Information</h3>
-        {!!$setting['workout-information']!!}
+        {!!$setting['workout-information'] ?? ''!!}
       </div>
     </div>
     <div class="col-12 col-md-5">
       <div class="card p-4 shadow-sm" style="border-radius: 25px">
         <h3 class="text-center fw-bold">Disclaimer</h3>
-        {!!$setting['workout-disclaimer']!!}
+        {!!$setting['workout-disclaimer'] ?? ''!!}
       </div>
     </div>
   </div>
