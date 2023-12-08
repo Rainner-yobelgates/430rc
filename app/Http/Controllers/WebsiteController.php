@@ -28,13 +28,22 @@ class WebsiteController extends Controller
     }
     public function home(){
         $getFaq = Faq::where('status', 80)->orderBy('order', 'ASC')->get();
-        $getProduct = Product::with(['attributes' => function($query){
-            $query->whereIn('id', function ($subquery) {
-                $subquery->select(DB::raw('MIN(id)'))
-                    ->from('attributes')
-                    ->where('status', 80)
-                    ->groupBy('size');
-            })->orderBy('order', 'ASC');;
+        // $getProduct = Product::with(['attributes' => function($query) {
+        //     $query->whereIn('id', function ($subquery) {
+        //         $subquery->select(DB::raw('MIN(id)'))
+        //             ->from('attributes')
+        //             ->whereColumn('product_id', 'products.id')
+        //             ->where('status', 80)
+        //             ->groupBy('size');
+        //     })->orderBy('order', 'ASC');
+        // }])->orderBy('created_at', 'DESC')->limit(8)->get();
+        // dd($getProduct);
+        $getProduct = Product::with(['attributes' => function($query) {
+            $query->select('attributes.*')
+                ->from(DB::raw('(SELECT MIN(id) as min_id FROM attributes WHERE status = 80 GROUP BY product_id, size) as sub'))
+                ->join('attributes', function ($join) {
+                    $join->on('attributes.id', '=', 'sub.min_id');
+                });
         }])->orderBy('created_at', 'DESC')->limit(8)->get();
         $setting = $this->setting;
         return view('website.home', compact('setting', 'getFaq', 'getProduct'));
@@ -50,13 +59,20 @@ class WebsiteController extends Controller
     }
     public function products(Request $request){
         $setting = $this->setting;
-        $getProduct = Product::with(['attributes' => function($query){
-            $query->whereIn('id', function ($subquery) {
-                $subquery->select(DB::raw('MIN(id)'))
-                    ->from('attributes')
-                    ->where('status', 80)
-                    ->groupBy('size');
-            })->orderBy('order', 'ASC');
+        // $getProduct = Product::with(['attributes' => function($query){
+        //     $query->whereIn('id', function ($subquery) {
+        //         $subquery->select(DB::raw('MIN(id)'))
+        //             ->from('attributes')
+        //             ->where('status', 80)
+        //             ->groupBy('size');
+        //     })->orderBy('order', 'ASC');
+        // }]);
+        $getProduct = Product::with(['attributes' => function($query) {
+            $query->select('attributes.*')
+                ->from(DB::raw('(SELECT MIN(id) as min_id FROM attributes WHERE status = 80 GROUP BY product_id, size) as sub'))
+                ->join('attributes', function ($join) {
+                    $join->on('attributes.id', '=', 'sub.min_id');
+                });
         }]);
         if ($request->ajax()) {
             if($request->search != ''){
@@ -91,13 +107,20 @@ class WebsiteController extends Controller
         $setting = $this->setting;
         $getColor = Color::pluck('name', 'id')->toArray();
 
-        $newProduct = Product::with(['attributes' => function($query){
-            $query->whereIn('id', function ($subquery) {
-                $subquery->select(DB::raw('MIN(id)'))
-                    ->from('attributes')
-                    ->where('status', 80)
-                    ->groupBy('size');
-            })->orderBy('order', 'ASC');
+        // $newProduct = Product::with(['attributes' => function($query){
+        //     $query->whereIn('id', function ($subquery) {
+        //         $subquery->select(DB::raw('MIN(id)'))
+        //             ->from('attributes')
+        //             ->where('status', 80)
+        //             ->groupBy('size');
+        //     })->orderBy('order', 'ASC');
+        // }])->orderBy('created_at', 'DESC')->limit(4)->get();
+        $newProduct = Product::with(['attributes' => function($query) {
+            $query->select('attributes.*')
+                ->from(DB::raw('(SELECT MIN(id) as min_id FROM attributes WHERE status = 80 GROUP BY product_id, size) as sub'))
+                ->join('attributes', function ($join) {
+                    $join->on('attributes.id', '=', 'sub.min_id');
+                });
         }])->orderBy('created_at', 'DESC')->limit(4)->get();
         $limitedImages = $product->images()
         ->where('status', 80)
@@ -174,20 +197,26 @@ class WebsiteController extends Controller
             return redirect()->route('detail',$product->slugs)->with('error', 'Product is already in the cart');
         }
     }
-    
     public function cart(){
         $setting = $this->setting;
         $getCart = Session::get('cart');
         $getColor = Color::pluck('name', 'id')->toArray();
         $getProvince = Province::pluck('province', 'id')->toArray();
 
-        $newProduct = Product::with(['attributes' => function($query){
-            $query->whereIn('id', function ($subquery) {
-                $subquery->select(DB::raw('MIN(id)'))
-                    ->from('attributes')
-                    ->where('status', 80)
-                    ->groupBy('size');
-            })->orderBy('order', 'ASC');
+        // $newProduct = Product::with(['attributes' => function($query){
+        //     $query->whereIn('id', function ($subquery) {
+        //         $subquery->select(DB::raw('MIN(id)'))
+        //             ->from('attributes')
+        //             ->where('status', 80)
+        //             ->groupBy('size');
+        //     })->orderBy('order', 'ASC');
+        // }])->orderBy('created_at', 'DESC')->limit(4)->get();
+        $newProduct = Product::with(['attributes' => function($query) {
+            $query->select('attributes.*')
+                ->from(DB::raw('(SELECT MIN(id) as min_id FROM attributes WHERE status = 80 GROUP BY product_id, size) as sub'))
+                ->join('attributes', function ($join) {
+                    $join->on('attributes.id', '=', 'sub.min_id');
+                });
         }])->orderBy('created_at', 'DESC')->limit(4)->get();
         $totalPrice = 0;
         $countProduct = 0;

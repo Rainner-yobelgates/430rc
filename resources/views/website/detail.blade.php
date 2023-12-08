@@ -30,7 +30,7 @@
                 <div class="select-color mb-4">
                     <p class="h6 fw-bold">Select Color</p>
                     {{-- foreach  --}}
-                    @foreach ($product->attributes->pluck('color_id')->unique() as $color)
+                    @foreach ($product->attributes->where('status', 80)->pluck('color_id')->unique() as $color)
                         <label for="color_{{$color}}" id="label-{{$color}}" class="btn-color btn btn-outline-dark rounded me-2">
                             <input style="display: none" type="radio" name="color" id="color_{{$color}}" data-id="{{$color}}" class="size-input" onclick="colorInput(this)" value="{{$color}}" >
                             <span class="p m-0">{{$getColor[$color]}}</span>
@@ -41,7 +41,7 @@
                 <div class="select-size mb-4">
                     <p class="h6 fw-bold">Select Size</p>
                     {{-- foreach  --}}
-                    @foreach ($product->attributes->sortBy('order')->pluck('size')->unique() as $size)
+                    @foreach ($product->attributes->where('status', 80)->sortBy('order')->pluck('size')->unique() as $size)
                     <label for="size_{{$size}}" id="label-{{$size}}" class="btn-size btn btn-light me-2">
                         <input style="display: none" type="radio" name="size" id="size_{{$size}}" data-id="{{$size}}" class="size-input" onclick="sizeInput(this)" value="{{$size}}" >
                         <span class="p m-0">{{$size}}</span>
@@ -177,7 +177,7 @@
         let color = getColor[$('input[name="color"]').val()];
         let productName = `{{$product->name}}`;
         let cleanName = productName.replace(/&#039;/g, '')
-        let link = `https://wa.me/62{{$setting['whatsapp']}}?text=Hello,%20I%20want%20to%20ask%20about%20the%20availability%20of%20this%20product%20%3F%0A%0A---- The%20Product ----%20%0AName%20%3A%20`+cleanName+`%0APrice%20%3A%20{{number_format($product->price)}}%0ACategory%20%3A%20{{$product->category}}%0ASize%20%3A%20` + size + `%0AColor%20%3A%20` + color + `%0ALink%20%3A%20{{url()->current()}}%0A%0AIf%20this%20product%20is%20available,%20I%20am%20interested%20in%20continuing%20with%20the%20ordering%20process`;
+        let link = `https://wa.me/62{{$setting['whatsapp'] ?? ''}}?text=Hello,%20I%20want%20to%20ask%20about%20the%20availability%20of%20this%20product%20%3F%0A%0A---- The%20Product ----%20%0AName%20%3A%20`+cleanName+`%0APrice%20%3A%20{{number_format($product->price)}}%0ACategory%20%3A%20{{$product->category}}%0ASize%20%3A%20` + size + `%0AColor%20%3A%20` + color + `%0ALink%20%3A%20{{url()->current()}}%0A%0AIf%20this%20product%20is%20available,%20I%20am%20interested%20in%20continuing%20with%20the%20ordering%20process`;
         
         $('#whatsapp-link').attr('href', link);
         $('#whatsapp-link').attr('target', '_blank');

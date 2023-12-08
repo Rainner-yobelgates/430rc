@@ -165,9 +165,10 @@ class ProductController extends Controller
         $this->passingAttributeData['color_id'] = [
             'required', 
             'numeric', 
-            Rule::unique('attributes')->where(function ($query) use($request) {
+            Rule::unique('attributes')->where(function ($query) use($request, $product) {
                 return $query->where('color_id', $request->color_id)
-                ->where('size', $request->size);
+                ->where('size', $request->size)
+                ->where('product_id', $product->id);
             }),
         ];
         $data = $this->validate($request, $this->passingAttributeData,[

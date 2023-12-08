@@ -21,8 +21,9 @@ class Product extends Model
         'order',
         'status',
     ];
-    public function attributes(){
-        return $this->hasMany(Attribute::class);
+    public function attributes()
+    {
+        return $this->hasMany(Attribute::class, 'product_id', 'id');
     }
     public function images(){
         return $this->hasMany(Image::class);
