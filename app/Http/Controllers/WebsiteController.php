@@ -24,27 +24,23 @@ class WebsiteController extends Controller
     public function __construct(Request $request)
     {
         $this->setting = Setting::pluck('value', 'key')->toArray();
-        
     }
     public function home(){
         $getFaq = Faq::where('status', 80)->orderBy('order', 'ASC')->get();
-        // $getProduct = Product::with(['attributes' => function($query) {
-        //     $query->whereIn('id', function ($subquery) {
-        //         $subquery->select(DB::raw('MIN(id)'))
-        //             ->from('attributes')
-        //             ->whereColumn('product_id', 'products.id')
-        //             ->where('status', 80)
-        //             ->groupBy('size');
-        //     })->orderBy('order', 'ASC');
-        // }])->orderBy('created_at', 'DESC')->limit(8)->get();
-        // dd($getProduct);
+        // for get product using this
         $getProduct = Product::with(['attributes' => function($query) {
             $query->select('attributes.*')
-                ->from(DB::raw('(SELECT MIN(id) as min_id FROM attributes WHERE status = 80 GROUP BY product_id, size) as sub'))
-                ->join('attributes', function ($join) {
-                    $join->on('attributes.id', '=', 'sub.min_id');
-                });
-        }])->orderBy('created_at', 'DESC')->limit(8)->get();
+                ->from('attributes')
+                ->whereIn('id', function ($subquery) {
+                    $subquery->select(DB::raw('MIN(id)'))
+                        ->from('attributes AS a')
+                        ->whereColumn('a.product_id', 'attributes.product_id') // Sesuaikan kolom relasi antara attributes dan products
+                        ->where('a.status', 80)
+                        ->groupBy('a.size');
+                })
+                ->orderBy('order', 'ASC');
+        }])->orderBy('order', 'ASC')->limit(8)->get();
+        
         $setting = $this->setting;
         return view('website.home', compact('setting', 'getFaq', 'getProduct'));
     }

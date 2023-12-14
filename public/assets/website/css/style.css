@@ -77,6 +77,12 @@ body{
 .btn-size{
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
 }
+/* detail product */
+.gallery-product{
+    max-height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
 /* Smartphone */
 /* @media (max-width: 575.98px)   */
 @media (max-width: 767.98px) {
@@ -136,6 +142,11 @@ body{
     }
     .icon-sosial{
         font-size: 20px;
+    }
+    .gallery-product{
+        max-height: 110px;
+        object-fit: cover;
+        width: 100%;
     }
 }
 /* Tablet and Ipad */

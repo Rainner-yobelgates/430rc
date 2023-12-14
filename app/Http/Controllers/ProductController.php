@@ -23,10 +23,11 @@ class ProductController extends Controller
         $this->passingData = [
             'name' => 'required',
             'price' => 'required|numeric',
-            'image' => 'image|mimes:jpeg,png,jpg,webp|max:3072',
+            'image' => 'image|mimes:jpeg,png,jpg,webp|max:2048',
             'category' => 'required',
             'description' => 'required',
             'weight' => 'required|numeric',
+            'order' => 'required|numeric',
             'status' => 'required|numeric',
         ];
 
@@ -38,7 +39,7 @@ class ProductController extends Controller
         ];
 
         $this->passingImageData = [
-            'image' => 'image|mimes:jpeg,png,jpg,webp|max:3072',
+            'image' => 'image|mimes:jpeg,png,jpg,webp|max:2048',
             'status' => 'required|numeric',
         ];
     }
@@ -64,7 +65,7 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
-        $this->passingData['image'] = 'required|image|mimes:jpeg,png,jpg,webp|max:3072';
+        $this->passingData['image'] = 'required|image|mimes:jpeg,png,jpg,webp|max:2048';
         $data = $this->validate($request, $this->passingData);
         $data['slugs'] = Str::slug($data['name']);
         if ($request->hasFile('image')) {
@@ -258,7 +259,7 @@ class ProductController extends Controller
     }
 
     public function imageStore(Product $product, Request $request){
-        $this->passingImageData['image'] = 'required|image|mimes:jpeg,png,jpg,webp|max:3072';
+        $this->passingImageData['image'] = 'required|image|mimes:jpeg,png,jpg,webp|max:2048';
         $data = $this->validate($request, $this->passingImageData);
         $data['product_id'] = $product->id;
         if ($request->hasFile('image')) {

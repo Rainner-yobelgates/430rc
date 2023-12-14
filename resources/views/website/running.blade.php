@@ -26,20 +26,20 @@
                 <table class="table table-bordered">
                     <thead class="table-dark">
                       <tr class="text-center">
-                        <th scope="col">Monday</th>
-                        <th scope="col">Tuesday</th>
-                        <th scope="col">Wednesday</th>
-                        <th scope="col">Thursday</th>
-                        <th scope="col">Friday</th>
-                        <th scope="col">Saturday</th>
-                        <th scope="col">Sunday</th>
+                        <th class="col">Monday</th>
+                        <th class="col">Tuesday</th>
+                        <th class="col">Wednesday</th>
+                        <th class="col">Thursday</th>
+                        <th class="col">Friday</th>
+                        <th class="col">Saturday</th>
+                        <th class="col">Sunday</th>
                       </tr>
                     </thead>
                     <tbody class="table-light">
                       <tr>
                         @if (isset($getRunning[$i-1]))
                           @foreach ($getRunning[$i-1]->description as $desc)
-                          <td scope="row" class="text-center">
+                          <td class="col" class="text-center">
                               <p class="fw-bold mb-0">Warming up</p>
                               <p class="fw-bold">Dynamic Screching</p>
                               <hr>
