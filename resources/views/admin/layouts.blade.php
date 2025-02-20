@@ -46,6 +46,11 @@
                             <i class="fa-solid fa-image" style="font-size: 18px;"></i> <span class="align-middle">Gallery</span>
                         </a>
 					</li>
+					<li class="sidebar-item {{ $active == "voucher" ? "active" : "" }}">
+						<a class="sidebar-link d-flex align-items-center" href="{{route('panel.voucher.index')}}">
+                            <i class="fa-solid fa-ticket" style="font-size: 18px;"></i> <span class="align-middle">Voucher</span>
+                        </a>
+					</li>
 					<li class="sidebar-item {{ $active == "color" ? "active" : "" }}">
 						<a class="sidebar-link d-flex align-items-center" href="{{route('panel.color.index')}}">
                             <i class="fa-solid fa-droplet" style="font-size: 18px;"></i> <span class="align-middle">Color</span>

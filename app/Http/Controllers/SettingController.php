@@ -15,7 +15,9 @@ class SettingController extends Controller
         $active = 'setting';
 
         $settings = Setting::pluck('value', 'key')->toArray();
-        $getCity = City::pluck('city', 'id')->toArray();
+        $getCity = City::selectRaw("id, CONCAT(type, ' ', city) as name")
+        ->pluck('name', 'id')
+        ->toArray();
         return view('admin.setting.index', compact('title', 'active', 'settings', 'getCity'));
     }
 

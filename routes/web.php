@@ -12,6 +12,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerEmailController;
+use App\Http\Controllers\VoucherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,7 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/panel/product/{product:id}/image/{image:id}/edit', [ProductController::class, 'imageEdit'])->name('panel.product.image.edit');
     Route::patch('/panel/product/{product:id}/image/{image:id}/update', [ProductController::class, 'imageUpdate'])->name('panel.product.image.update');
     Route::delete('/panel/product/{product:id}/image/{image:id}/delete', [ProductController::class, 'imageDelete'])->name('panel.product.image.delete');
-     // Color
+    // Color
      Route::get('/panel/color', [ColorController::class, 'index'])->name('panel.color.index');
      Route::get('/panel/color/data', [ColorController::class, 'data'])->name('panel.color.data');
      Route::get('/panel/color/create', [ColorController::class, 'create'])->name('panel.color.create');
@@ -96,6 +97,15 @@ Route::group(['middleware' => 'auth'], function () {
      Route::get('/panel/color/{color:id}/edit', [ColorController::class, 'edit'])->name('panel.color.edit');
      Route::patch('/panel/color/{color:id}/update', [ColorController::class, 'update'])->name('panel.color.update');
      Route::delete('/panel/color/{color:id}/delete', [ColorController::class, 'delete'])->name('panel.color.delete');
+    // Voucher
+    Route::get('/panel/voucher', [VoucherController::class, 'index'])->name('panel.voucher.index');
+    Route::get('/panel/voucher/data', [VoucherController::class, 'data'])->name('panel.voucher.data');
+    Route::get('/panel/voucher/create', [VoucherController::class, 'create'])->name('panel.voucher.create');
+    Route::post('/panel/voucher/store', [VoucherController::class, 'store'])->name('panel.voucher.store');
+    Route::get('/panel/voucher/{voucher:id}/show', [VoucherController::class, 'show'])->name('panel.voucher.show');
+    Route::get('/panel/voucher/{voucher:id}/edit', [VoucherController::class, 'edit'])->name('panel.voucher.edit');
+    Route::patch('/panel/voucher/{voucher:id}/update', [VoucherController::class, 'update'])->name('panel.voucher.update');
+    Route::delete('/panel/voucher/{voucher:id}/delete', [VoucherController::class, 'delete'])->name('panel.voucher.delete');
     //Settings
     Route::get('/panel/setting', [SettingController::class, 'index'])->name('panel.setting.index');
     Route::patch('/panel/setting/update', [SettingController::class, 'update'])->name('panel.setting.update');
