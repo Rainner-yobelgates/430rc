@@ -16,6 +16,7 @@ use App\Models\RunningProgram;
 use App\Models\WorkoutProgram;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Voucher;
 use Illuminate\Support\Facades\Session;
 
 class WebsiteController extends Controller
@@ -274,5 +275,43 @@ class WebsiteController extends Controller
         ]);
         CustomerEmail::create($data);
         return redirect('about')->with('success', 'Email sent successfully');
+    }
+
+    public function checkVoucher(Request $request){
+        $getVoucher = Voucher::where('code', $request->code)
+                         ->where('status', 80)
+                         ->first();
+
+        if ($getVoucher) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Voucher is valid.',
+                'voucher' => $getVoucher
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid or expired voucher code.'
+            ]);
+        }
+    }
+
+    public function usedVoucher(Request $request){
+        $getVoucher = Voucher::where('code', $request->code)
+        ->where('status', 80)
+        ->first();
+
+        if ($getVoucher) {
+        $getVoucher->status = 99;
+        $getVoucher->save();
+
+        return response()->json([
+            'success' => true,
+            ]);
+        } else {
+            return response()->json([
+            'success' => false,
+            ]);
+        }
     }
 }

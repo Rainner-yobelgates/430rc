@@ -118,28 +118,42 @@
                     </div>
                   @endif
                   <hr>
-                  <div class="row mb-2 d-flex align-items-center">
-                    <div class="col-6">
-                        <p class="mb-0 fw-bold">Total : </p>
+                    <div class="row mb-2 d-flex align-items-center">
+                        <div class="col-6">
+                            <p class="mb-0 fw-bold">Total : </p>
+                        </div>
+                        <div class="col-6">
+                            <p class="mb-0 text-end fw-bold">{{number_format($totalPrice)}}</p>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <p class="mb-0 text-end fw-bold">{{number_format($totalPrice)}}</p>
+                    <div class="row mb-2 d-flex align-items-center">
+                        <div class="col-7">
+                            <p class="mb-0 fw-bold">Shipping Cost : </p>
+                        </div>
+                        <div class="col-5">
+                            <p class="mb-0 text-end fw-bold cost-courier">0</p>
+                        </div>
                     </div>
-                  </div>
-                  <div class="row mb-2 d-flex align-items-center">
-                    <div class="col-7">
-                        <p class="mb-0 fw-bold">Shipping Cost : </p>
+                    <div class="row mb-2 d-flex align-items-center">
+                        <div class="col-7">
+                            <p class="mb-0 fw-bold">Promo : </p>
+                        </div>
+                        <div class="col-5">
+                            <p class="mb-0 text-end fw-bold promo">0</p>
+                        </div>
                     </div>
-                    <div class="col-5">
-                        <p class="mb-0 text-end fw-bold cost-courier">0</p>
-                    </div>
-                </div>
                 <hr>
                 <p class="mb-0 text-end fw-bold" id="totalPrice">0</p>
                 </div>
               </div>
-              <div class="d-flex justify-content-center mt-3">
-                <a href="javascript:void(0)" class="text-decoration-none text-white w-100" id="whatsapp-link"><button class="btn btn-dark w-100" id="proccessBtn" disabled>Process Order</button></a>
+              <div class="mt-3">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" disabled placeholder="Insert promo code" id="voucherCode" aria-label="voucher">
+                    <button class="btn btn-outline-secondary" disabled type="button" id="checkVoucher">Check</button>
+                </div>
+                <a href="javascript:void(0)" class="text-decoration-none text-white w-100" id="whatsapp-link">
+                    <button class="btn btn-dark w-100" id="proccessBtn" disabled>Process Order</button>
+                </a>
               </div>
            </div>
         </div>
@@ -186,6 +200,7 @@
 @stop
 @section('script')
     <script>
+        let totalPrice
         let getColor = JSON.parse('{!!json_encode($getColor)!!}')
 
          $.ajaxSetup({
@@ -195,7 +210,120 @@
         });
         $(document).ready(function() {
             getCity()
+            $('#checkVoucher').click(checkVoucher);
+            $('#proccessBtn').click(proccessOrder);
+
 		});
+
+        function proccessOrder(e){
+            e.preventDefault();
+            const voucherCode = $('#voucherCode').val();
+
+            swal({
+                title: 'Are you sure?',
+                text: 'If you use the voucher, it will be applied and marked as used. Do you want to proceed with this order?',
+                icon: 'warning',
+            }).then((result) => {
+                if (result) {
+                    if (voucherCode === '') {
+                        $('#whatsapp-link')[0].click();
+                    
+                    }else{
+                        $.ajax({
+                            url: '/used-voucher', // Route di Laravel
+                            method: 'POST',
+                            data: {
+                                code: voucherCode,
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    swal({
+                                        title: "Success",
+                                        text: 'Voucher has been successfully used',
+                                        icon: "success",
+                                    });
+                                $('#whatsapp-link')[0].click();
+                                } else {
+                                    swal({
+                                        title: "Error",
+                                        text: 'Invalid or already used voucher code',
+                                        icon: "error",
+                                    });
+                                }
+                            },
+                            error: function () {
+                                swal({
+                                    title: "Error",
+                                    text: 'Something went wrong. Please try again later.',
+                                    icon: "error",
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+        function checkVoucher(){
+            const voucherCode = $('#voucherCode').val();
+            console.log(voucherCode);
+            
+            if (voucherCode === '') {
+                swal({
+                    title: "Error",
+                    text: 'Please enter a voucher code.',
+                    icon: "error",
+                });
+                return;
+            }
+
+            $.ajax({
+                url: '/check-voucher', // Route di Laravel
+                method: 'POST',
+                data: {
+                    code: voucherCode,
+                },
+                success: function (response) {
+                    if (response.success) {
+                        let total = '{{$totalPrice}}'
+                        let amount = parseInt(response.voucher.amount).toLocaleString('id-ID', {
+                            currency: 'IDR',
+                        });
+                        amount = amount.replace(/\./g, ',');
+                        $('.promo').html('- ' + amount)
+
+                        let priceInt = parseInt(totalPrice.replace(/,/g, ''), 10) - parseInt(response.voucher.amount)                        
+                        totalPrice = parseInt(priceInt).toLocaleString('id-ID', {
+                            currency: 'IDR',
+                        });
+                        totalPrice = totalPrice.replace(/\./g, ',');
+                        $('#totalPrice').html(totalPrice)
+                        updateWhatsAppLink(total, amount)
+
+                        swal({
+                            title: "Success",
+                            text: 'Voucher is valid!',
+                            icon: "success",
+                        });
+                    } else {
+                        swal({
+                            title: "Error",
+                            text: 'Invalid voucher code',
+                            icon: "error",
+                        });
+                    }
+                },
+                error: function () {
+                    swal({
+                        title: "Error",
+                        text: 'Something went wrong. Please try again later.',
+                        icon: "error",
+                    });
+                }
+            });
+            
+        }
+
         function getCity(){
             let province_id = $('#province').val()
 
@@ -216,7 +344,7 @@
                 },
             })
         }
-        
+
         function getCourier(){
             let city_id = $('#city option:selected').val()
             let weight = '{{$totalWeight}}'
@@ -247,16 +375,18 @@
             price = price.replace(/\./g, ',');
 
             $('.cost-courier').html(price)
-            let totalPrice = parseInt(priceInt + parseInt(total)).toLocaleString('id-ID', {
+            totalPrice = parseInt(priceInt + parseInt(total)).toLocaleString('id-ID', {
                 currency: 'IDR',
             });
             totalPrice = totalPrice.replace(/\./g, ',');
             $('#totalPrice').html(totalPrice)
             $('#proccessBtn').attr('disabled', false)
-            updateWhatsAppLink(total, totalPrice)
+            $('#checkVoucher').attr('disabled', false)
+            $('#voucherCode').attr('disabled', false)
+            updateWhatsAppLink(total, 0)
         }
 
-        function updateWhatsAppLink(subTotal, totalPrice) {
+        function updateWhatsAppLink(subTotal, promo) {
             let cart = JSON.parse(`{!!json_encode($getCart)!!}`);
             let listProduct = '';
             let province = $('#province option:selected').text();
@@ -280,7 +410,7 @@
                 linkRoute = linkRoute.replace(':id', item.slugs)
                 listProduct += '%20%0A'+index+'.%20Name%20%3A%20'+cleanName+'%0A%20%20%20%20Price%20%3A%20'+price+'%0A%20%20%20%20Category%20%3A%20'+item.category+'%0A%20%20%20%20Size%20%3A%20'+item.size+'%0A%20%20%20%20Color%20%3A%20'+getColor[item.color]+'%0A%20%20%20%20Link%20%3A%20'+linkRoute+''
             })
-            let link = `https://wa.me/62{{$setting['whatsapp'] ?? ''}}?text=Hello,%20I%20would%20like%20to%20inquire%20about%20the%20availability%20of%20the%20following%20product(s):%0A%0A--- The%20Product ---%0A`+listProduct+`%0A%0A---%20My%20Address%20---%0A%0A-%20%20Province%20%3A%20`+province+`%0A-%20%20City%20%3A%20`+city+`%0A-%20%20Full%20Address%20%3A%20`+fullAddress+`%0A-%20%20Courier%20%3A%20`+courier+`%0A%0A---%20My%20Billing%20---%0A%0A-%20%20Shipping%20Cost%20%3A%20`+shippingCost+`%20(estimated)%0A-%20%20Subtotal%20%3A%20`+subTotal+`%0A-%20%20Total%20%3A%20`+totalPrice+`%0A%0AIf%20the%20mentioned%20product(s)%20is/are%20available,%20I%20am%20keen%20on%20proceeding%20with%20the%20order.%20Thank%20you.`;
+            let link = `https://wa.me/62{{$setting['whatsapp'] ?? ''}}?text=Hello,%20I%20would%20like%20to%20inquire%20about%20the%20availability%20of%20the%20following%20product(s):%0A%0A--- The%20Product ---%0A`+listProduct+`%0A%0A---%20My%20Address%20---%0A%0A-%20%20Province%20%3A%20`+province+`%0A-%20%20City%20%3A%20`+city+`%0A-%20%20Full%20Address%20%3A%20`+fullAddress+`%0A-%20%20Courier%20%3A%20`+courier+`%0A%0A---%20My%20Billing%20---%0A%0A-%20%20Shipping%20Cost%20%3A%20`+shippingCost+`%20(estimated)%0A-%20%20Subtotal%20%3A%20`+subTotal+`%0A-%20%20Promo%20%3A%20-`+promo+`%0A-%20%20Total%20%3A%20`+totalPrice+`%0A%0AIf%20the%20mentioned%20product(s)%20is/are%20available,%20I%20am%20keen%20on%20proceeding%20with%20the%20order.%20Thank%20you.`;
             $('#whatsapp-link').attr('href', link);
             $('#whatsapp-link').attr('target', '_blank');
         }
