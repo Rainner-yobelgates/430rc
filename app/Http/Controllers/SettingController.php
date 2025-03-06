@@ -49,35 +49,35 @@ class SettingController extends Controller
             if (isset($imageSetting->value)) {
                 Storage::delete($imageSetting->value);
             }
-            $data['header'] = $request->file('header')->store('uploads/header');
+            $data['header'] = $request->file('header')->store('uploads/header', 'public');
         }
         if ($request->hasFile('motivation')) {
             $imageSetting = Setting::where('key', 'motivation')->first();
             if (isset($imageSetting->value)) {
                 Storage::delete($imageSetting->value);
             }
-            $data['motivation'] = $request->file('motivation')->store('uploads/motivation');
+            $data['motivation'] = $request->file('motivation')->store('uploads/motivation', 'public');
         }
         if ($request->hasFile('about-image')) {
             $imageSetting = Setting::where('key', 'about-image')->first();
             if (isset($imageSetting->value)) {
                 Storage::delete($imageSetting->value);
             }
-            $data['about-image'] = $request->file('about-image')->store('uploads/about-image');
+            $data['about-image'] = $request->file('about-image')->store('uploads/about-image', 'public');
         }
         if ($request->hasFile('running-video')) {
             $imageSetting = Setting::where('key', 'running-video')->first();
             if (isset($imageSetting->value)) {
                 Storage::delete($imageSetting->value);
             }
-            $data['running-video'] = $request->file('running-video')->store('uploads/program');
+            $data['running-video'] = $request->file('running-video')->store('uploads/program', 'public');
         }
         if ($request->hasFile('workout-video')) {
             $imageSetting = Setting::where('key', 'workout-video')->first();
             if (isset($imageSetting->value)) {
                 Storage::delete($imageSetting->value);
             }
-            $data['workout-video'] = $request->file('workout-video')->store('uploads/program');
+            $data['workout-video'] = $request->file('workout-video')->store('uploads/program', 'public');
         }
         foreach ($data as $key => $val) {
             $getData = Setting::firstOrCreate([

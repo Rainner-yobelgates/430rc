@@ -45,7 +45,7 @@ class GalleryController extends Controller
         $this->passingData['image'] = 'required|image|mimes:jpeg,png,jpg|max:3072';
         $data = $this->validate($request, $this->passingData);
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('uploads/gallery');
+            $data['image'] = $request->file('image')->store('uploads/gallery', 'public');
         }
         $getGallery = Gallery::create($data);
         return redirect(route('panel.gallery.show', $getGallery->id))->with('success', 'Gallery created successfully');
@@ -62,7 +62,7 @@ class GalleryController extends Controller
         $data = $this->validate($request, $this->passingData);
         if ($request->hasFile('image')) {
             Storage::delete($gallery->image);
-            $data['image'] = $request->file('image')->store('uploads/presenter');
+            $data['image'] = $request->file('image')->store('uploads/presenter', 'public');
         }
         $gallery->update($data);
         return redirect(route('panel.gallery.show', $gallery->id))->with('success', 'Gallery updated successfully');

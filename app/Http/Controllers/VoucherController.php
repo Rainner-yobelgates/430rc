@@ -57,10 +57,6 @@ class VoucherController extends Controller
 
     public function update(Voucher $voucher, Request $request){
         $data = $this->validate($request, $this->passingData);
-        if ($request->hasFile('image')) {
-            Storage::delete($voucher->image);
-            $data['image'] = $request->file('image')->store('uploads/presenter');
-        }
         $voucher->update($data);
         return redirect(route('panel.voucher.show', $voucher->id))->with('success', 'Voucher updated successfully');
     }

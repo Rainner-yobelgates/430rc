@@ -69,7 +69,7 @@ class ProductController extends Controller
         $data = $this->validate($request, $this->passingData);
         $data['slugs'] = Str::slug($data['name']);
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('uploads/product');
+            $data['image'] = $request->file('image')->store('uploads/product', 'public');
         }
         $getProduct = Product::create($data);
         return redirect(route('panel.product.show', $getProduct->id))->with('success', 'Product created successfully');
@@ -87,7 +87,7 @@ class ProductController extends Controller
         $data['slugs'] = Str::slug($data['name']);
         if ($request->hasFile('image')) {
             Storage::delete($product->image);
-            $data['image'] = $request->file('image')->store('uploads/presenter');
+            $data['image'] = $request->file('image')->store('uploads/product', 'public');
         }
         $product->update($data);
         return redirect(route('panel.product.show', $product->id))->with('success', 'Product updated successfully');
@@ -263,7 +263,7 @@ class ProductController extends Controller
         $data = $this->validate($request, $this->passingImageData);
         $data['product_id'] = $product->id;
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('uploads/product/gallery');
+            $data['image'] = $request->file('image')->store('uploads/product/gallery', 'public');
         }
         $getImage = Image::create($data);
         return redirect(route('panel.product.image.show', [$product->id, $getImage->id]))->with('success', 'Gallery Image created successfully');
@@ -280,7 +280,7 @@ class ProductController extends Controller
         $data = $this->validate($request, $this->passingImageData);
         if ($request->hasFile('image')) {
             Storage::delete($image->image);
-            $data['image'] = $request->file('image')->store('uploads/product/gallery');
+            $data['image'] = $request->file('image')->store('uploads/product/gallery', 'public');
         }
         $image->update($data);
         return redirect(route('panel.product.show', [$product->id, $image->id]))->with('success', 'Gallery Image updated successfully');
