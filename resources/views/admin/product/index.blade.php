@@ -39,7 +39,7 @@
             $('#table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('panel.product.data') }}/",
+                ajax: "{{ secure_url(route('panel.product.data', [], true)) }}/",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex', class:"align-middle"},
                     {data: 'name', name: 'name', class:"align-middle"},
