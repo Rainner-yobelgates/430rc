@@ -35,7 +35,7 @@
             processing: true,
             serverSide: true,
             ajax: "{{ route('panel.gallery.data') }}" + '?_token=' + '{{ csrf_token() }}',
-            type: "POST",
+            type: 'POST',
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',

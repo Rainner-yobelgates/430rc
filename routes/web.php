@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Gallery
     Route::get('/panel/gallery', [GalleryController::class, 'index'])->name('panel.gallery.index');
     Route::post('/panel/gallery/data', [GalleryController::class, 'data'])->name('panel.gallery.data');
+    Route::get('/panel/gallery/data', [GalleryController::class, 'data'])->name('panel.gallery.data');
     Route::get('/panel/gallery/create', [GalleryController::class, 'create'])->name('panel.gallery.create');
     Route::post('/panel/gallery/store', [GalleryController::class, 'store'])->name('panel.gallery.store');
     Route::get('/panel/gallery/{gallery:id}/show', [GalleryController::class, 'show'])->name('panel.gallery.show');
