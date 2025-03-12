@@ -31,7 +31,7 @@
             $('#table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('panel.customerEmail.data') }}/",
+                ajax: "{{ route('panel.customerEmail.data') }}" + '?_token=' + '{{ csrf_token() }}',
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex', class:"align-middle"},
                     {data: 'email', name: 'email', class:"align-middle"},

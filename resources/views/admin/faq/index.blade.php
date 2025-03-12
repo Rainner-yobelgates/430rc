@@ -34,7 +34,7 @@
             $('#table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('panel.faq.data') }}/",
+                ajax: "{{ route('panel.faq.data') }}" + '?_token=' + '{{ csrf_token() }}',
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex', class:"align-middle"},
                     {data: 'title', name: 'title', class:"align-middle"},

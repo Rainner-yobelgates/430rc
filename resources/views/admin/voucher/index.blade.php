@@ -35,7 +35,7 @@
             $('#table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('panel.voucher.data') }}/",
+                ajax: "{{ route('panel.voucher.data') }}" + '?_token=' + '{{ csrf_token() }}',
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex', class:"align-middle"},
                     {data: 'name', name: 'name', class:"align-middle"},
