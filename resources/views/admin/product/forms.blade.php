@@ -215,7 +215,7 @@
             $('#table2').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('panel.product.image.data', $product->id) }}/",
+                ajax: "{{ route('panel.product.image.data', $product->id) }}" + '?_token=' + '{{ csrf_token() }}',
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex', class:"align-middle"},
                     {data: 'image', name: 'image', class:"align-middle"},
