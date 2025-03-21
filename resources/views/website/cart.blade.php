@@ -135,10 +135,10 @@
                         </div>
                     </div>
                     <div class="row mb-2 d-flex align-items-center">
-                        <div class="col-7">
+                        <div class="col-4">
                             <p class="mb-0 fw-bold">Promo : </p>
                         </div>
-                        <div class="col-5">
+                        <div class="col-8">
                             <p class="mb-0 text-end fw-bold promo">0</p>
                         </div>
                     </div>
@@ -201,6 +201,7 @@
 @section('script')
     <script>
         let totalPrice
+        
         let getColor = JSON.parse('{!!json_encode($getColor)!!}')
 
          $.ajaxSetup({
@@ -266,7 +267,6 @@
 
         function checkVoucher(){
             const voucherCode = $('#voucherCode').val();
-            console.log(voucherCode);
             
             if (voucherCode === '') {
                 swal({
@@ -290,15 +290,16 @@
                             currency: 'IDR',
                         });
                         amount = amount.replace(/\./g, ',');
-                        $('.promo').html('- ' + amount)
-
-                        let priceInt = parseInt(totalPrice.replace(/,/g, ''), 10) - parseInt(response.voucher.amount)                        
-                        totalPrice = parseInt(priceInt).toLocaleString('id-ID', {
+                        $('.promo').html('( ' + response.voucher.name+ ' )' + ' - ' + amount)
+                        
+                        let tempTotal = totalPrice
+                        let priceInt = parseInt(tempTotal.replace(/,/g, ''), 10) - parseInt(response.voucher.amount)                        
+                        tempTotal = parseInt(priceInt).toLocaleString('id-ID', {
                             currency: 'IDR',
                         });
-                        totalPrice = totalPrice.replace(/\./g, ',');
-                        $('#totalPrice').html(totalPrice)
-                        updateWhatsAppLink(total, amount)
+                        tempTotal = tempTotal.replace(/\./g, ',');
+                        $('#totalPrice').html(tempTotal)
+                        updateWhatsAppLink(total, amount, tempTotal)
 
                         swal({
                             title: "Success",
@@ -383,10 +384,10 @@
             $('#proccessBtn').attr('disabled', false)
             $('#checkVoucher').attr('disabled', false)
             $('#voucherCode').attr('disabled', false)
-            updateWhatsAppLink(total, 0)
+            updateWhatsAppLink(total, 0, totalPrice)
         }
 
-        function updateWhatsAppLink(subTotal, promo) {
+        function updateWhatsAppLink(subTotal, promo, getPrice) {
             let cart = JSON.parse(`{!!json_encode($getCart)!!}`);
             let listProduct = '';
             let province = $('#province option:selected').text();
@@ -410,7 +411,7 @@
                 linkRoute = linkRoute.replace(':id', item.slugs)
                 listProduct += '%20%0A'+index+'.%20Name%20%3A%20'+cleanName+'%0A%20%20%20%20Price%20%3A%20'+price+'%0A%20%20%20%20Category%20%3A%20'+item.category+'%0A%20%20%20%20Size%20%3A%20'+item.size+'%0A%20%20%20%20Color%20%3A%20'+getColor[item.color]+'%0A%20%20%20%20Link%20%3A%20'+linkRoute+''
             })
-            let link = `https://wa.me/62{{$setting['whatsapp'] ?? ''}}?text=Hello,%20I%20would%20like%20to%20inquire%20about%20the%20availability%20of%20the%20following%20product(s):%0A%0A--- The%20Product ---%0A`+listProduct+`%0A%0A---%20My%20Address%20---%0A%0A-%20%20Province%20%3A%20`+province+`%0A-%20%20City%20%3A%20`+city+`%0A-%20%20Full%20Address%20%3A%20`+fullAddress+`%0A-%20%20Courier%20%3A%20`+courier+`%0A%0A---%20My%20Billing%20---%0A%0A-%20%20Shipping%20Cost%20%3A%20`+shippingCost+`%20(estimated)%0A-%20%20Subtotal%20%3A%20`+subTotal+`%0A-%20%20Promo%20%3A%20-`+promo+`%0A-%20%20Total%20%3A%20`+totalPrice+`%0A%0AIf%20the%20mentioned%20product(s)%20is/are%20available,%20I%20am%20keen%20on%20proceeding%20with%20the%20order.%20Thank%20you.`;
+            let link = `https://wa.me/62{{$setting['whatsapp'] ?? ''}}?text=Hello,%20I%20would%20like%20to%20inquire%20about%20the%20availability%20of%20the%20following%20product(s):%0A%0A--- The%20Product ---%0A`+listProduct+`%0A%0A---%20My%20Address%20---%0A%0A-%20%20Province%20%3A%20`+province+`%0A-%20%20City%20%3A%20`+city+`%0A-%20%20Full%20Address%20%3A%20`+fullAddress+`%0A-%20%20Courier%20%3A%20`+courier+`%0A%0A---%20My%20Billing%20---%0A%0A-%20%20Shipping%20Cost%20%3A%20`+shippingCost+`%20(estimated)%0A-%20%20Subtotal%20%3A%20`+subTotal+`%0A-%20%20Promo%20%3A%20-`+promo+`%0A-%20%20Total%20%3A%20`+getPrice+`%0A%0AIf%20the%20mentioned%20product(s)%20is/are%20available,%20I%20am%20keen%20on%20proceeding%20with%20the%20order.%20Thank%20you.`;
             $('#whatsapp-link').attr('href', link);
             $('#whatsapp-link').attr('target', '_blank');
         }
