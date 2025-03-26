@@ -40,12 +40,12 @@
                         @if (isset($getWorkout[$i-1]))
                           @foreach ($getWorkout[$i-1]->description as $desc)
                           <td scope="row" class="text-center">
-                              <p class="fw-bold mb-0">Warming up</p>
-                              <p class="fw-bold">Dynamic Screching</p>
+                              <p class="fw-bold mb-0 text-center">Warming up</p>
+                              <p class="fw-bold text-center">Dynamic Screching</p>
                               <hr>
                               {!!$desc!!}
                               <hr>
-                              <p class="fw-bold">Cooling down</p>
+                              <p class="fw-bold text-center">Cooling down</p>
                           </td>
                           @endforeach                            
                         @endif
