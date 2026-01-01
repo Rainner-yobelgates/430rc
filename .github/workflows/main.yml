@@ -33,10 +33,3 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: docker.artodigital.id/fourthirty:latest
           push: true
-
-      - name: Deploy Main
-        run: |
-          curl -X POST \
-          -H "Content-Type: application/json" \
-          -d '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}' \
-          ${{vars.DEPLOYMENT_WEBHOOK_URL_STAGE}}${{ secrets.DEPLOYMENT_TOKEN }}
