@@ -42,17 +42,12 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            # Masuk ke folder project lo di VPS
             cd fourthirty
 
-            # Login ulang (opsional, tapi bagus buat mastikan session gak expire)
             docker login docker.artodigital.id -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-            # Pull image terbaru
             docker compose pull
 
-            # Up lagi, Docker bakal tau cuma container fourthirty yang perlu diupdate
             docker compose up -d
 
-            # Opsional: Bersihkan image lama yang udah gak kepake (dangling images)
             docker image prune -f
