@@ -62,3 +62,77 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# 430RC
+
+Project Laravel 9 dengan PHP 8.
+
+## Prasyarat
+
+- PHP >= 8.0
+- Composer
+- MySQL
+- Node.js & NPM (untuk compile assets)
+- Docker & Docker Compose _(opsional)_
+
+---
+
+## Cara Menjalankan (Lokal)
+
+### 1. Clone & Install Dependencies
+
+```bash
+git clone <repo-url> 430rc
+cd 430rc
+composer install
+npm install
+```
+
+### 2. Setup Environment
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Edit file `.env` dan sesuaikan konfigurasi database:
+
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nama_database
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 3. Migrasi Database
+
+```bash
+php artisan migrate
+```
+
+### 4. Compile Assets
+
+```bash
+npm run dev
+```
+
+### 5. Jalankan Server
+
+```bash
+php artisan serve
+```
+
+Buka [http://localhost:8000](http://localhost:8000) di browser.
+
+---
+
+## Cara Menjalankan (Docker)
+
+```bash
+docker network create artodigital   # jika belum ada
+docker compose up -d --build
+```
+
+Akses di [http://localhost:8089](http://localhost:8089).
